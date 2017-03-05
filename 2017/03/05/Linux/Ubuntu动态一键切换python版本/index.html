@@ -5,23 +5,17 @@
     
     <title>Ubuntu动态一键切换python版本 | Alic Feng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！
-
-时日不多，赶紧用python！昨晚失眠，起来写脚本，然而文章就诞">
+    <meta name="description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Ubuntu动态一键切换python版本">
 <meta property="og:url" content="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/index.html">
 <meta property="og:site_name" content="Alic Feng">
-<meta property="og:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！
-
-时日不多，赶紧用python！昨晚失眠，起来写脚本，然而文章就诞">
+<meta property="og:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
 <meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-05T09:39:30.358Z">
+<meta property="og:updated_time" content="2017-03-05T13:10:51.837Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu动态一键切换python版本">
-<meta name="twitter:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！
-
-时日不多，赶紧用python！昨晚失眠，起来写脚本，然而文章就诞">
+<meta name="twitter:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
 <meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
 
@@ -161,7 +155,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                2
+                3
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -188,8 +182,14 @@
                     </td>
                     
                     <td>
-                        <a href="/fenglican/" target="_blank" title="weixin" >
+                        <a href="mailto:18814129510@163.com" target="_blank" title="weixin" >
                             <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/%E7%AB%8B%E7%81%BF-%E5%86%AF-7b92a3101/" target="_blank" title="linkedin" >
+                            <i class="fa fa-linkedin"></i>
                         </a>
                     </td>
                     
@@ -245,12 +245,13 @@
         
             
             <p><strong><strong>前言</strong></strong><br>ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。<br>于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！</p>
+<a id="more"></a>
 <hr>
 <p>时日不多，赶紧用python！<br>昨晚失眠，起来写脚本，然而文章就诞生了！</p>
 <hr>
-<p><strong><strong>解决方案</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">#安全备份</div><div class="line">sudo cp /usr/bin/python /usr/bin/python_default</div><div class="line">#切换版本 实质上就是创建软链</div><div class="line">sudo ln -s /usr/bin/python3.4 /usr/bin/python</div></pre></td></tr></table></figure></p>
+<p><strong><strong>解决方案</strong></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#安全备份</span></div><div class="line">sudo cp /usr/bin/python /usr/bin/python_default</div><div class="line"><span class="comment">#切换版本 实质上就是创建软链</span></div><div class="line">sudo ln <span class="_">-s</span> /usr/bin/python3.4 /usr/bin/python</div></pre></td></tr></table></figure></p>
 <hr>
-<p><strong><strong>动态一键切换python版本</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line">#!/bin/bash</div><div class="line"></div><div class="line">#--------config----------start</div><div class="line">#备份目录</div><div class="line">pythonDir=&quot;/usr/bin/pythonAlic/&quot;</div><div class="line">#--------config----------end</div><div class="line"></div><div class="line">index=0</div><div class="line">pythonarray[0]=&quot;null&quot;</div><div class="line"></div><div class="line">if [ $&#123;UID&#125; == 0 ];then</div><div class="line">	echo &quot;请选择您要切换python的版本:&quot;</div><div class="line">	echo &quot;1. 初始化程序与备份&quot;</div><div class="line">	#判断配置目录是否存在</div><div class="line">	if [ -x $pythonDir ];then</div><div class="line">		#遍历目录下的文件----------start</div><div class="line">		dir=$(ls -l $&#123;pythonDir&#125; |awk &apos;&#123;print $NF&#125;&apos;)</div><div class="line">		for i in $dir</div><div class="line">		do</div><div class="line">			#过滤文件----------start</div><div class="line">			((index++))</div><div class="line">			if [ $index -eq 1 ];then</div><div class="line">				continue</div><div class="line">			else</div><div class="line">				after=$&#123;i:0-1&#125;</div><div class="line">				if [ &quot;$after&quot; -gt 0 ] 2&gt;/dev/null ;then</div><div class="line">					str=&quot;$&#123;index&#125;. 切换$&#123;i&#125;&quot;</div><div class="line">					#echo $str</div><div class="line">					pythonarray[$index]=$str</div><div class="line">					echo $&#123;pythonarray[$index]&#125;</div><div class="line">				else</div><div class="line">					((index--))</div><div class="line">				fi</div><div class="line">			fi</div><div class="line">			#过滤文件----------end</div><div class="line">		done</div><div class="line">	else</div><div class="line">		echo &quot;程序首次运行，请先执行1选项&quot;</div><div class="line">	fi</div><div class="line">	#遍历目录下的文件----------end</div><div class="line">	echo &quot;------------------------------&quot;</div><div class="line">	#开始操作</div><div class="line">	read -p &quot;请选择您要切换python的版本:&quot; option</div><div class="line">	</div><div class="line">	if [ $option == 1 ]; then</div><div class="line">		if [ -x $pythonDir ]; then</div><div class="line">			rm -rf $pythonDir	</div><div class="line">			echo &quot;重置目录成功&quot;</div><div class="line">		fi</div><div class="line">		mkdir $pythonDir	</div><div class="line">		echo &quot;$&#123;pythonDir&#125;python_default&quot;</div><div class="line">		`cp /usr/bin/python &quot;$&#123;pythonDir&#125;python_default&quot;`</div><div class="line">		`cp /usr/bin/python* &quot;$&#123;pythonDir&#125;&quot;`</div><div class="line">		echo &quot;备份文件完成&quot;</div><div class="line">	fi</div><div class="line">	for ((i=1;i&lt;=$&#123;index&#125;;i++));</div><div class="line">	do</div><div class="line">		key=$&#123;pythonarray[$i]:0:1&#125;</div><div class="line">		#echo $key</div><div class="line">		if [ &quot;$&#123;option&#125;&quot; == &quot;$&#123;key&#125;&quot; ]; then</div><div class="line">			#开始切换版本操作----------start</div><div class="line">			pyname=$&#123;pythonarray[$i]:5&#125;</div><div class="line">			rm /usr/bin/python</div><div class="line">			ln -s /usr/bin/$pyname /usr/bin/python</div><div class="line">			echo &quot;版本已经切换至$pyname&quot;</div><div class="line">			#开始切换版本操作----------end</div><div class="line">		fi</div><div class="line">	done</div><div class="line">else</div><div class="line">	echo &quot;您没有权限~~~&quot;</div><div class="line">fi</div></pre></td></tr></table></figure></p>
+<p><strong><strong>动态一键切换python版本</strong></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#--------config----------start</span></div><div class="line"><span class="comment">#备份目录</span></div><div class="line">pythonDir=<span class="string">"/usr/bin/pythonAlic/"</span></div><div class="line"><span class="comment">#--------config----------end</span></div><div class="line"></div><div class="line">index=0</div><div class="line">pythonarray[0]=<span class="string">"null"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;UID&#125;</span> == 0 ];<span class="keyword">then</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"请选择您要切换python的版本:"</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"1. 初始化程序与备份"</span></div><div class="line">	<span class="comment">#判断配置目录是否存在</span></div><div class="line">	<span class="keyword">if</span> [ -x <span class="variable">$pythonDir</span> ];<span class="keyword">then</span></div><div class="line">		<span class="comment">#遍历目录下的文件----------start</span></div><div class="line">		dir=$(ls <span class="_">-l</span> <span class="variable">$&#123;pythonDir&#125;</span> |awk <span class="string">'&#123;print $NF&#125;'</span>)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$dir</span></div><div class="line">		<span class="keyword">do</span></div><div class="line">			<span class="comment">#过滤文件----------start</span></div><div class="line">			((index++))</div><div class="line">			<span class="keyword">if</span> [ <span class="variable">$index</span> <span class="_">-eq</span> 1 ];<span class="keyword">then</span></div><div class="line">				<span class="built_in">continue</span></div><div class="line">			<span class="keyword">else</span></div><div class="line">				after=<span class="variable">$&#123;i:0-1&#125;</span></div><div class="line">				<span class="keyword">if</span> [ <span class="string">"<span class="variable">$after</span>"</span> <span class="_">-gt</span> 0 ] 2&gt;/dev/null ;<span class="keyword">then</span></div><div class="line">					str=<span class="string">"<span class="variable">$&#123;index&#125;</span>. 切换<span class="variable">$&#123;i&#125;</span>"</span></div><div class="line">					<span class="comment">#echo $str</span></div><div class="line">					pythonarray[<span class="variable">$index</span>]=<span class="variable">$str</span></div><div class="line">					<span class="built_in">echo</span> <span class="variable">$&#123;pythonarray[$index]&#125;</span></div><div class="line">				<span class="keyword">else</span></div><div class="line">					((index--))</div><div class="line">				<span class="keyword">fi</span></div><div class="line">			<span class="keyword">fi</span></div><div class="line">			<span class="comment">#过滤文件----------end</span></div><div class="line">		<span class="keyword">done</span></div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="built_in">echo</span> <span class="string">"程序首次运行，请先执行1选项"</span></div><div class="line">	<span class="keyword">fi</span></div><div class="line">	<span class="comment">#遍历目录下的文件----------end</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"------------------------------"</span></div><div class="line">	<span class="comment">#开始操作</span></div><div class="line">	<span class="built_in">read</span> -p <span class="string">"请选择您要切换python的版本:"</span> option</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> [ <span class="variable">$option</span> == 1 ]; <span class="keyword">then</span></div><div class="line">		<span class="keyword">if</span> [ -x <span class="variable">$pythonDir</span> ]; <span class="keyword">then</span></div><div class="line">			rm -rf <span class="variable">$pythonDir</span>	</div><div class="line">			<span class="built_in">echo</span> <span class="string">"重置目录成功"</span></div><div class="line">		<span class="keyword">fi</span></div><div class="line">		mkdir <span class="variable">$pythonDir</span>	</div><div class="line">		<span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>python_default"</span></div><div class="line">		`cp /usr/bin/python <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>python_default"</span>`</div><div class="line">		`cp /usr/bin/python* <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>"</span>`</div><div class="line">		<span class="built_in">echo</span> <span class="string">"备份文件完成"</span></div><div class="line">	<span class="keyword">fi</span></div><div class="line">	<span class="keyword">for</span> ((i=1;i&lt;=<span class="variable">$&#123;index&#125;</span>;i++));</div><div class="line">	<span class="keyword">do</span></div><div class="line">		key=<span class="variable">$&#123;pythonarray[$i]:0:1&#125;</span></div><div class="line">		<span class="comment">#echo $key</span></div><div class="line">		<span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;option&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;key&#125;</span>"</span> ]; <span class="keyword">then</span></div><div class="line">			<span class="comment">#开始切换版本操作----------start</span></div><div class="line">			pyname=<span class="variable">$&#123;pythonarray[$i]:5&#125;</span></div><div class="line">			rm /usr/bin/python</div><div class="line">			ln <span class="_">-s</span> /usr/bin/<span class="variable">$pyname</span> /usr/bin/python</div><div class="line">			<span class="built_in">echo</span> <span class="string">"版本已经切换至<span class="variable">$pyname</span>"</span></div><div class="line">			<span class="comment">#开始切换版本操作----------end</span></div><div class="line">		<span class="keyword">fi</span></div><div class="line">	<span class="keyword">done</span></div><div class="line"><span class="keyword">else</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"您没有权限~~~"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
 <p><img src="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Shell"></p>
 <hr>
 <p><strong><strong><a href="https://github.com/alicance" target="_blank" rel="external">价值源于技术，贡献源于分享</a></strong></strong></p>
@@ -264,7 +265,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cizwls3y50003ljowm72hnk0x" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cizwq5zbr00040iowlcqyxmom" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -341,8 +342,17 @@
         
 <nav id="article-nav">
     
+        <a href="/2017/03/05/Android/Android获取网络状态/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    Android获取网络状态
+                
+            </div>
+        </a>
     
-        <a href="/2017/03/03/Linux/那个程序员的Linux常用软件清单/" id="article-nav-older" class="article-nav-link-wrap">
+    
+        <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
             <div class="article-nav-title">那个程序员的Linux常用软件清单</div>
         </a>
@@ -378,6 +388,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/03/05/Android/Android获取网络状态/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Android/Android获取网络状态/" class="title">Android获取网络状态</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T12:19:58.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="thumbnail">
     
     
@@ -397,7 +426,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/03/03/Linux/那个程序员的Linux常用软件清单/" class="thumbnail">
+                            <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -408,8 +437,8 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
-                            <p class="item-title"><a href="/2017/03/03/Linux/那个程序员的Linux常用软件清单/" class="title">那个程序员的Linux常用软件清单</a></p>
-                            <p class="item-date"><time datetime="2017-03-03T08:41:51.000Z" itemprop="datePublished">2017-03-03</time></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="title">那个程序员的Linux常用软件清单</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T08:41:51.000Z" itemprop="datePublished">2017-03-05</time></p>
                         </div>
                     </li>
                 
@@ -422,7 +451,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">2</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li></ul>
         </div>
     </div>
 

@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android获取网络状态 | Alic Feng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
+
+实现步骤流程：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android获取网络状态">
+<meta property="og:url" content="http://samego.com/2017/03/05/Android/Android获取网络状态/index.html">
+<meta property="og:site_name" content="Alic Feng">
+<meta property="og:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
+
+实现步骤流程：">
+<meta property="og:updated_time" content="2017-03-05T13:09:44.137Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android获取网络状态">
+<meta name="twitter:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
+
+实现步骤流程：">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Alic Feng</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar_kun.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar_kun.png" />
+            <h2 id="name">Alic Feng</h2>
+            <h3 id="title">相遇是缘 相思渐缠</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>广州, 中国</span>
+            <a id="follow" target="_blank" href="https://github.com/alicance/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                3
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                3
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/alicance" target="_blank" title="github" >
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/alic.feng" target="_blank" title="facebook" >
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="mailto:18814129510@163.com" target="_blank" title="weixin" >
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/%E7%AB%8B%E7%81%BF-%E5%86%AF-7b92a3101/" target="_blank" title="linkedin" >
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Android/Android获取网络状态" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android获取网络状态
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/03/05/Android/Android获取网络状态/">
+            <time datetime="2017-03-05T12:19:58.000Z" itemprop="datePublished">2017-03-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。</p>
+<hr>
+<p><strong>实现步骤流程：</strong></p>
+<a id="more"></a>
+<p>1 .获取ConnectivityManager对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）</div><div class="line">Context context = activity.getApplicationContext();</div><div class="line">ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);</div></pre></td></tr></table></figure></p>
+<p>2、获取NetworkInfo对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 获取NetworkInfo对象</div><div class="line">NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();</div></pre></td></tr></table></figure></p>
+<p>3、判断当前网络状态是否为连接状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (networkInfo[i].getState() == NetworkInfo.State.CONNECTED)&#123; </div><div class="line">   return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>4、在AndroidManifest.xml中添加访问当前网络状态权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;&gt;&lt;/uses-permission&gt;</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong><strong>已经封装好了的网络工具类</strong></strong><br><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> com.samego.alic.utils;</div><div class="line"><span class="keyword">import</span> android.content.Context;</div><div class="line"><span class="keyword">import</span> android.location.LocationManager;</div><div class="line"><span class="keyword">import</span> android.net.ConnectivityManager;</div><div class="line"><span class="keyword">import</span> android.net.NetworkInfo;<span class="keyword">import</span> android.telephony.TelephonyManager;</div><div class="line"><span class="comment">/**</span></div><div class="line"> * 网络工具类</div><div class="line"> * Created by alic on 16-4-8. </div><div class="line">*/</div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">NetWorkUtils</span> </span>&#123;   </div><div class="line"><span class="comment">/**     </span></div><div class="line">* 判断是否有网络连接     </div><div class="line">*    </div><div class="line">* <span class="doctag">@param</span> context  </div><div class="line">* <span class="doctag">@return</span>   </div><div class="line">*/</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isNetworkConnected</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">// 获取手机所有连接管理对象(包括对wi-fi,net等连接的管理) </span></div><div class="line">           ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">           <span class="comment">// 获取NetworkInfo对象</span></div><div class="line">            NetworkInfo networkInfo = manager.getActiveNetworkInfo();</div><div class="line">           <span class="comment">//判断NetworkInfo对象是否为空</span></div><div class="line">            <span class="keyword">if</span> (networkInfo != <span class="keyword">null</span>)</div><div class="line">                <span class="keyword">return</span> networkInfo.isAvailable(); </div><div class="line">       &#125;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">   &#125;    </div><div class="line"><span class="comment">/**</span></div><div class="line">* 判断WIFI网络是否可用</div><div class="line">* </div><div class="line">* <span class="doctag">@param</span> context </div><div class="line">* <span class="doctag">@return</span></div><div class="line">/</div><div class="line">    public static boolean isWifiConnected(Context context) &#123;</div><div class="line">        if (context != null) &#123; </div><div class="line">          // 获取手机所有连接管理对象(包括对wi-fi,net等连接的管理)</div><div class="line">           ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">            // 获取NetworkInfo对象</div><div class="line">            NetworkInfo networkInfo = manager.getActiveNetworkInfo(); </div><div class="line">         //判断NetworkInfo对象是否为空 并且类型是否为WIFI</div><div class="line">            if (networkInfo != null &amp;&amp; networkInfo.getType() == ConnectivityManager.TYPE_WIFI) </div><div class="line">               return networkInfo.isAvailable();</div><div class="line">        &#125;        return false;</div><div class="line">    &#125;   </div><div class="line"> /**</div><div class="line">* 判断MOBILE网络是否可用</div><div class="line">*</div><div class="line">* <span class="doctag">@param</span> context</div><div class="line">* <span class="doctag">@return</span></div><div class="line">*/</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isMobileConnected</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//获取手机所有连接管理对象(包括对wi-fi,net等连接的管理)</span></div><div class="line">            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">           <span class="comment">//获取NetworkInfo对象</span></div><div class="line">            NetworkInfo networkInfo = manager.getActiveNetworkInfo();</div><div class="line">            <span class="comment">//判断NetworkInfo对象是否为空 并且类型是否为MOBILE </span></div><div class="line">           <span class="keyword">if</span> (networkInfo != <span class="keyword">null</span> &amp;&amp; networkInfo.getType() == ConnectivityManager.TYPE_MOBILE)</div><div class="line">                <span class="keyword">return</span> networkInfo.isAvailable();</div><div class="line">        &#125; </div><div class="line">      <span class="keyword">return</span> <span class="keyword">false</span>; </div><div class="line">   &#125;    </div><div class="line"><span class="comment">/**</span></div><div class="line">* 获取当前网络连接的类型信息</div><div class="line">* 原生</div><div class="line">*</div><div class="line">* <span class="doctag">@param</span> context</div><div class="line">* <span class="doctag">@return</span></div><div class="line">*/    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getConnectedType</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="keyword">if</span> (context != <span class="keyword">null</span>) &#123;</div><div class="line">            <span class="comment">//获取手机所有连接管理对象</span></div><div class="line">            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">            <span class="comment">//获取NetworkInfo对象</span></div><div class="line">            NetworkInfo networkInfo = manager.getActiveNetworkInfo();</div><div class="line">            <span class="keyword">if</span> (networkInfo != <span class="keyword">null</span> &amp;&amp; networkInfo.isAvailable()) &#123;</div><div class="line">                <span class="comment">//返回NetworkInfo的类型</span></div><div class="line">                <span class="keyword">return</span> networkInfo.getType();</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> -<span class="number">1</span>; </div><div class="line">   &#125;</div><div class="line"><span class="comment">/**</span></div><div class="line">* 获取当前的网络状态 ：没有网络-0：WIFI网络1：4G网络-4：3G网络-3：2G网络-2</div><div class="line">* 自定义</div><div class="line">*</div><div class="line">* <span class="doctag">@param</span> context</div><div class="line">* <span class="doctag">@return</span></div><div class="line">*/</div><div class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">int</span> <span class="title">getAPNType</span><span class="params">(Context context)</span> </span>&#123;</div><div class="line">        <span class="comment">//结果返回值</span></div><div class="line">        <span class="keyword">int</span> netType = <span class="number">0</span>;</div><div class="line">        <span class="comment">//获取手机所有连接管理对象</span></div><div class="line">        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);</div><div class="line">        <span class="comment">//获取NetworkInfo对象</span></div><div class="line">       NetworkInfo networkInfo = manager.getActiveNetworkInfo();</div><div class="line">        <span class="comment">//NetworkInfo对象为空 则代表没有网络</span></div><div class="line">        <span class="keyword">if</span> (networkInfo == <span class="keyword">null</span>) &#123; </div><div class="line">           <span class="keyword">return</span> netType;</div><div class="line">        &#125;</div><div class="line">        <span class="comment">//否则 NetworkInfo对象不为空 则获取该networkInfo的类型</span></div><div class="line">        <span class="keyword">int</span> nType = networkInfo.getType();</div><div class="line">        <span class="keyword">if</span> (nType == ConnectivityManager.TYPE_WIFI) &#123;</div><div class="line">            <span class="comment">//WIFI</span></div><div class="line">            netType = <span class="number">1</span>;</div><div class="line">        &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nType == ConnectivityManager.TYPE_MOBILE) &#123;</div><div class="line">            <span class="keyword">int</span> nSubType = networkInfo.getSubtype();</div><div class="line">           TelephonyManager telephonyManager = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);</div><div class="line">            <span class="comment">//3G   联通的3G为UMTS或HSDPA 电信的3G为EVDO</span></div><div class="line">            <span class="keyword">if</span> (nSubType == TelephonyManager.NETWORK_TYPE_LTE </div><div class="line">                   &amp;&amp; !telephonyManager.isNetworkRoaming()) &#123;</div><div class="line">                netType = <span class="number">4</span>;</div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nSubType == TelephonyManager.NETWORK_TYPE_UMTS</div><div class="line">                    || nSubType == TelephonyManager.NETWORK_TYPE_HSDPA</div><div class="line">                    || nSubType == TelephonyManager.NETWORK_TYPE_EVDO_0</div><div class="line">                    &amp;&amp; !telephonyManager.isNetworkRoaming()) &#123;</div><div class="line">                netType = <span class="number">3</span>;</div><div class="line">                <span class="comment">//2G 移动和联通的2G为GPRS或EGDE，电信的2G为CDMA</span></div><div class="line">            &#125; <span class="keyword">else</span> <span class="keyword">if</span> (nSubType == TelephonyManager.NETWORK_TYPE_GPRS</div><div class="line">                    || nSubType == TelephonyManager.NETWORK_TYPE_EDGE</div><div class="line">                    || nSubType == TelephonyManager.NETWORK_TYPE_CDMA</div><div class="line">                    &amp;&amp; !telephonyManager.isNetworkRoaming()) &#123;</div><div class="line">                netType = <span class="number">2</span>;</div><div class="line">           &#125; <span class="keyword">else</span> &#123;</div><div class="line">                netType = <span class="number">2</span>; </div><div class="line">           &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> netType;</div><div class="line">    &#125;</div><div class="line"><span class="comment">/**     </span></div><div class="line">* 判断GPS是否打开     </div><div class="line">*ACCESS_FINE_LOCATION权限     </div><div class="line">* <span class="doctag">@param</span> context     </div><div class="line">* <span class="doctag">@return</span>     </div><div class="line">*/    </div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">boolean</span> <span class="title">isGPSEnabled</span><span class="params">(Context context)</span> </span>&#123;       </div><div class="line"> <span class="comment">//获取手机所有连接LOCATION_SERVICE对象        </span></div><div class="line">LocationManager locationManager = ((LocationManager) context.getSystemService(Context.LOCATION_SERVICE));</div><div class="line">        <span class="keyword">return</span> locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong><strong>网络信号详解</strong></strong></p>
+<hr>
+<p><strong><strong>Added in API level 1</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_UNKNOWN</div><div class="line">Network type is unknown</div><div class="line">Constant Value: 0 (0x00000000)</div><div class="line">(不知道网络类型)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_GPRS</div><div class="line">Current network is GPRS</div><div class="line">Constant Value: 1 (0x00000001)</div><div class="line">(2.5G）移动和联通</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_EDGE</div><div class="line">Current network is EDGE</div><div class="line">Constant Value: 2 (0x00000002)</div><div class="line">(2.75G)2.5G到3G的过渡    移动和联通</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_UMTS</div><div class="line">Current network is UMTS</div><div class="line">Constant Value: 3 (0x00000003)</div><div class="line">(3G)联通</div></pre></td></tr></table></figure>
+<p><strong><strong>Added in API level 4</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_CDMA</div><div class="line">Current network is CDMA: Either IS95A or IS95B</div><div class="line">Constant Value: 4 (0x00000004)</div><div class="line">(2G 电信)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_EVDO_0</div><div class="line">Current network is EVDO revision 0</div><div class="line">Constant Value: 5 (0x00000005)</div><div class="line">( 3G )电信</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_EVDO_A</div><div class="line">Current network is EVDO revision A</div><div class="line">Constant Value: 6 (0x00000006)</div><div class="line">(3.5G) 属于3G过渡</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_1xRTT</div><div class="line">Current network is 1xRTT</div><div class="line">Constant Value: 7 (0x00000007)</div><div class="line">( 2G )</div></pre></td></tr></table></figure>
+<p><strong><strong>Added in API level 5</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_HSDPA</div><div class="line">Current network is HSDPA</div><div class="line">Constant Value: 8 (0x00000008)</div><div class="line">(3.5G )</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_HSUPA</div><div class="line">Current network is HSUPA</div><div class="line">Constant Value: 9 (0x00000009)</div><div class="line">( 3.5G )</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_HSPA</div><div class="line">Current network is HSPA</div><div class="line">Constant Value: 10 (0x0000000a)</div><div class="line">( 3G )联通</div></pre></td></tr></table></figure>
+<p><strong><strong>Added in API level 8</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_IDEN</div><div class="line">Current network is iDen</div><div class="line">Constant Value: 11 (0x0000000b)</div><div class="line">(2G )</div></pre></td></tr></table></figure></p>
+<p><strong><strong>Added in API level 9</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_EVDO_B</div><div class="line">Current network is EVDO revision B</div><div class="line">Constant Value: 12 (0x0000000c)</div><div class="line">3G-3.5G</div></pre></td></tr></table></figure></p>
+<p><strong><strong>Added in API level 11</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_LTE</div><div class="line">Current network is LTE</div><div class="line">Constant Value: 13 (0x0000000d)</div><div class="line">(4G)</div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_EHRPD</div><div class="line">Current network is eHRPD</div><div class="line">Constant Value: 14 (0x0000000e)</div><div class="line">3G(3G到4G的升级产物)</div></pre></td></tr></table></figure>
+<p><strong><strong>Added in API level 13</strong></strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">public static final int NETWORK_TYPE_HSPAP</div><div class="line">Current network is HSPA+</div><div class="line">Constant Value: 15 (0x0000000f)</div><div class="line">( 3G )</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong><strong>网络信号简记</strong></strong></p>
+<blockquote>
+<p>4G  LTE<br>3G    联通的3G为HSDPA或HSDPAP   电信的3G为EVDO    移动3G为UMTS<br>2G 移动和联通的2G为GPRS或EGDE   电信的2G为CDMA</p>
+</blockquote>
+<hr>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cizwq5zbh00030iowsd0i9yd5" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://samego.com/2017/03/05/Android/Android获取网络状态/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://samego.com/2017/03/05/Android/Android获取网络状态/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Ubuntu动态一键切换python版本</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Android/Android获取网络状态/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Android/Android获取网络状态/" class="title">Android获取网络状态</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T12:19:58.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="title">Ubuntu动态一键切换python版本</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T09:37:37.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="title">那个程序员的Linux常用软件清单</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T08:41:51.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.jianshu.com/u/d3b98b758486">简书</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/alicance/">github</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Alic Feng<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+            this.page.url = 'http://samego.com/2017/03/05/Android/Android获取网络状态/';
+        
+        this.page.identifier = 'Android/Android获取网络状态';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

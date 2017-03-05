@@ -152,7 +152,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                3
+                4
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -173,7 +173,7 @@
                     </td>
                     
                     <td>
-                        <a href="/" target="_blank" title="facebook" >
+                        <a href="https://www.facebook.com/alic.feng" target="_blank" title="facebook" >
                             <i class="fa fa-facebook"></i>
                         </a>
                     </td>
@@ -193,7 +193,7 @@
 
             
             <section id="main">
-    <article id="tags-Linux" class="article article-type-tags" itemscope itemprop="blogPost">
+    <article id="tags-linux/Linux" class="article article-type-tags" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -201,7 +201,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/03/05/Linux/">Linux</a>
+            <a class="article-title" href="/2017/03/05/linux/Linux/">Linux</a>
         </h1>
     
 
@@ -210,7 +210,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/03/05/Linux/">
+        <a href="/2017/03/05/linux/Linux/">
             <time datetime="2017-03-04T16:10:16.000Z" itemprop="datePublished">2017-03-05</time>
         </a>
     </div>
@@ -236,7 +236,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Linux/" data-id="cizw9zyzq0000cxowd7280x3i" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/linux/Linux/" data-id="cizwbh8e00006fdowell8z5v3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -304,7 +304,133 @@
 
             
     
-        <a href="http://samego.com/2017/03/05/Linux/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://samego.com/2017/03/05/Linux/">评论</a>
+        <a href="http://samego.com/2017/03/05/linux/Linux/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://samego.com/2017/03/05/linux/Linux/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="tags-Android/Android" class="article article-type-tags" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/03/05/Android/Android/">Android</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/03/05/Android/Android/">
+            <time datetime="2017-03-04T16:10:16.000Z" itemprop="datePublished">2017-03-05</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/category/Android/">Android</a>
+    </div>
+
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://samego.com/2017/03/05/Android/Android/" data-id="cizwbh8e10007fdowu1xz4zbn" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://samego.com/2017/03/05/Android/Android/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://samego.com/2017/03/05/Android/Android/">评论</a>
     
 
         </footer>
@@ -340,7 +466,7 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/category/Linux/">Linux</a>
+        <a class="article-category-link" href="/category/linux/">Linux</a>
     </div>
 
                         
@@ -371,7 +497,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/hello-world/" data-id="cizw9zz000002cxowa0ejv24r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/hello-world/" data-id="cizwbh8bg0000fdowc9c9te7r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -492,7 +618,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/04/test/" data-id="cizw9zz060004cxowjr5aho99" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/04/test/" data-id="cizwbh8bo0002fdow8e568lyx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -582,7 +708,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/03/05/Linux/" class="thumbnail">
+                            <a href="/2017/03/05/linux/Linux/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -593,7 +719,26 @@
                         
                         <div class="item-inner">
                             <p class="item-category"></p>
-                            <p class="item-title"><a href="/2017/03/05/Linux/" class="title">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/linux/Linux/" class="title">Linux</a></p>
+                            <p class="item-date"><time datetime="2017-03-04T16:10:16.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Android/Android/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/category/Android/">Android</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Android/Android/" class="title">Android</a></p>
                             <p class="item-date"><time datetime="2017-03-04T16:10:16.000Z" itemprop="datePublished">2017-03-05</time></p>
                         </div>
                     </li>
@@ -611,7 +756,7 @@
                         </div>
                         
                         <div class="item-inner">
-                            <p class="item-category"><a class="article-category-link" href="/category/Linux/">Linux</a></p>
+                            <p class="item-category"><a class="article-category-link" href="/category/linux/">Linux</a></p>
                             <p class="item-title"><a href="/2017/03/05/hello-world/" class="title">Hello World</a></p>
                             <p class="item-date"><time datetime="2017-03-04T16:07:17.736Z" itemprop="datePublished">2017-03-05</time></p>
                         </div>
@@ -645,7 +790,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">分类</h3>
         <div class="widget">
-            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/Linux/">Linux</a><span class="category-list-count">1</span></li></ul>
+            <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/category/Android/">Android</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/category/linux/">Linux</a><span class="category-list-count">1</span></li></ul>
         </div>
     </div>
 
@@ -654,7 +799,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">3</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li></ul>
         </div>
     </div>
 

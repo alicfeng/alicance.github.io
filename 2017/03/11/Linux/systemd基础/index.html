@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>systemd基础 | Alic Feng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="systemd基础
+ 1.1 systemd的简介 计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质">
+<meta property="og:type" content="article">
+<meta property="og:title" content="systemd基础">
+<meta property="og:url" content="http://samego.com/2017/03/11/Linux/systemd基础/index.html">
+<meta property="og:site_name" content="Alic Feng">
+<meta property="og:description" content="systemd基础
+ 1.1 systemd的简介 计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-e939e998bc54614b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-e93c54328cd439db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-03-11T04:31:22.160Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="systemd基础">
+<meta name="twitter:description" content="systemd基础
+ 1.1 systemd的简介 计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1678789-e939e998bc54614b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Alic Feng</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar_kun.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar_kun.png" />
+            <h2 id="name">Alic Feng</h2>
+            <h3 id="title">Web &amp; App Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>广州, 中国</span>
+            <a id="follow" target="_blank" href="mailto:a@samego.com">联系我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                4
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                4
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/alicance" target="_blank" title="github" >
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/alic.feng" target="_blank" title="facebook" >
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/%E7%AB%8B%E7%81%BF-%E5%86%AF-7b92a3101/" target="_blank" title="linkedin" >
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Linux/systemd基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            systemd基础
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/03/11/Linux/systemd基础/">
+            <time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/内核/">内核</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <h4 id="systemd基础"><a href="#systemd基础" class="headerlink" title="systemd基础"></a>systemd基础</h4><ul>
+<li><strong><strong> 1.1 systemd的简介 </strong></strong><br>计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质量，一方面尽可能地减少进程已经将进程并行启动，另一方面就是更好地守护init进程，减少系统内存的不必要的开销。当然在systemd诞生之前呢，还有两个系统初始化的系统：systemvinit以及upstart，systemvinit是一套传统的初始化系统，已经逐渐地淡出了Linux历史舞台，然而被systemd和upstart取而代之，systemd和upstart它们有着各自的特点，不过目前已经有绝大多数的Linux发行版都采取了systemd，比如Fedora、openSUSE、Ubuntu、Gentoo、Arch Linux等一系列Linux发行版。<br>Linux系统启动要执行的程序是非常多的，比如挂载文件系统、加载硬件设备、启动后台服务、激活交换分区、启动用户程序等。每一个执行任务被systemd称为一个配置单元(uint)，换句话来说呢，挂在一个文件系统被称为一个配置单元、加载硬件设备被称为一个配置单元、启动系统后台服务被称为一个配置单元，等等。systemd包含了很多种不同类型的配置单元，在这里为什么写明具体有多少种类型的配置单元呢，很简单：因为当前systemd被诸多的Linux发行版系统推上了发展的热潮并一直在更新以及开发新的配置单元。以下就是目前systemd所包含的一些配置单元。</li>
+</ul>
+<a id="more"></a>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">service</td>
+<td style="text-align:left">服务配置单元，它代表一种服务进程，比如Apache2、Nginx、MySQL</td>
+</tr>
+<tr>
+<td style="text-align:center">device</td>
+<td style="text-align:left">设备配置单元，此类型的配置单元位于系统的设备树中</td>
+</tr>
+<tr>
+<td style="text-align:center">mount</td>
+<td style="text-align:left">此类配置单元封装文件系统结构层次中的一个挂载点。Systemd 将对这个挂载点进行监控和管理</td>
+</tr>
+<tr>
+<td style="text-align:center">automount</td>
+<td style="text-align:left">该配置单元与上一个相似，automount为自动挂载点，但是当该自动挂载点被访问时，systemd 会执行挂载点中自定义的挂载行为</td>
+</tr>
+<tr>
+<td style="text-align:center">swap</td>
+<td style="text-align:left">交换配置单元，此类交换配置目的是用来管理交换分区。系统启动时激活用户在系统自定义的交换分区</td>
+</tr>
+<tr>
+<td style="text-align:center">target</td>
+<td style="text-align:left">逻辑配置单元，此类配置单元为其他配置单元进行逻辑分组。旨在引用其他配置单元</td>
+</tr>
+<tr>
+<td style="text-align:center">timer</td>
+<td style="text-align:left">定时器配置单元，它用来定时触发用户定义的操作，该类配置单元已经取代了传统的定时服务atd以及crond等</td>
+</tr>
+<tr>
+<td style="text-align:center">snapshot</td>
+<td style="text-align:left">快照配置单元，顾名思义：用来保存系统运行的状态</td>
+</tr>
+<tr>
+<td style="text-align:center">socket</td>
+<td style="text-align:left">套接字配置单元，此类配置单元封装系统和互联网中的一个套接字 。就目前来说，systemd 支持流式、数据报和连续包的AF_INET、AF_INET6、AF_UNIX socket 。</td>
+</tr>
+</tbody>
+</table>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-e939e998bc54614b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="systemd架构图"></p>
+<p>注意，每一个配置单元(uint)都有彼此对应的配置单元文件，比如Apache有对应的一个配置单元文件apache2.service、MysQL有对应的一个配置单元msqld.service。此类型的配置单元文件的编写即简单又简洁。便于Linux管理者或运维者编辑以及维护这些配置单元。如下是systemd中的一个系统日志服务的配置单元syslog.service文件内容：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line">[Unit]</div><div class="line">Description=System Logging Service        #描述信息</div><div class="line">Requires=syslog.socket          #指定依赖</div><div class="line">Documentation=man:rsyslogd(8)         </div><div class="line">Documentation=http://www.rsyslog.com/doc/</div><div class="line"></div><div class="line">[Service]</div><div class="line">Type=notify        #服务类型</div><div class="line">ExecStart=/usr/sbin/rsyslogd -n</div><div class="line">StandardOutput=null</div><div class="line">Restart=on-failure        #指定失败时重启</div><div class="line"></div><div class="line">[Install]</div><div class="line">WantedBy=multi-user.target</div><div class="line">Alias=syslog.service       #别名</div></pre></td></tr></table></figure></p>
+<p>我们简单分析systemd的配置单元文件可以归纳为三个部分组成，分别为Uint、Service、Install。Unit区块通常是配置文件的第一个区块，用来定义 Unit 的元数据，以及配置与其他 Unit 的关系。它的主要字段如表1-1-2；Install通常是配置文件的最后一个区块，用来定义如何启动，以及是否开机启动。它的主要字段如表1-1-3；[Service]区块用来 Service 的配置，只有 Service 类型的 Unit 才有这个区块。它的主要字段如表1-1-4。</p>
+<p>那么systemd的配置单元文件位于什么地方呢，由于一个Linux操作系统有很多systemd的配置单元文件，并且不同的配置单元文件加载的顺序自然也是不一样的，也就是说，一个Linux操作系统有多个存放systemd配置单元的目录。以Ubuntu系统为例，systemd的配置单元文件位于如下的目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"># find / -name  systemd</div><div class="line">/sys/fs/cgroup/systemd</div><div class="line">/bin/systemd</div><div class="line">/etc/systemd</div><div class="line">/etc/xdg/systemd</div><div class="line">/run/user/1000/systemd</div><div class="line">/run/systemd</div><div class="line">/run/udev/tags/systemd</div><div class="line">/lib/systemd</div><div class="line">/lib/systemd/systemd</div><div class="line">/usr/share/doc/systemd</div><div class="line">/usr/share/doc/rygel/examples/service/service/systemd</div><div class="line">/usr/share/systemd</div><div class="line">/usr/share/bug/systemd</div><div class="line">/usr/share/lintian/overrides/systemd</div><div class="line">/usr/share/lintian/data/systemd</div><div class="line">/usr/share/pam-configs/systemd</div><div class="line">/usr/lib/python3/dist-packages/systemd</div><div class="line">/usr/lib/systemd</div><div class="line">/usr/lib/x86_64-linux-gnu/switchboard/hardware/pantheon-power/systemd</div><div class="line">/var/lib/systemd</div></pre></td></tr></table></figure></p>
+<ul>
+<li><p><strong><strong> 1.2 systemd的原理 </strong></strong><br>在systemd体系框架中，所有的服务程序都是可以并发进行启动的。比如 Avahi、D-Bus、livirtd、X11、HAL可以同时启动。当然，我们仔细思考会发现这样一个问题：Avahi需要syslog的服务，Avahi和syslog同时启动，倘若假设Avahi的启动比较快，syslog还没来得及启动，然而Avahi却需要记录日志，那么这种情况系统的启动岂不是有问题的吗？当然是的。Systemd系统采取了各个服务之间互相依赖的解决方案，这种解决方案的相互依赖具体分类成三种关系类型：socket 依赖、D-Bus 依赖以及文件系统依赖，然而每一个类型的依赖都是可以通过相应的技术解除依赖关系，从而解决了所有服务程序可以并发启动的问题。</p>
+</li>
+<li><p>systemd并发解决socket依赖<br>socket是套接字配置单元，几乎所有的服务依赖是套接字依赖。假设系统在初始化中有服务A、B以及一个套接字端口S，在启动中，服务A需要依赖套接字端口S，同时服务B依赖套接字端口S才能成功启动，倘若在初始化是套接字S没有成功启动端口时，在传统的启动逻辑思维中是这样的：首先需要服务A启动套接字端口S，等待它进入就绪状态之后再一一启动其他的服务A、B。但是 systemd 与此不一样，我们需要将套接字端口S预先启动，因此服务B就可以同时启动而无需等待服务 A 来创建 S 了，即使服务A没有成功启动，服务B也是可以正常启动的，那么其他进程向 S1 发送的服务请求实际上会被 Linux 操作系统缓存，其他进程会在这个请求的地方等待。一旦服务 A 启动就绪，就可以立即处理缓存的请求，一切都开始正常运行。<br>那么服务如何使用由 init 进程创建的套接字呢？Linux操作系统有一个特性，当进程调用 fork 或者 exec 创建子进程之后，所有在父进程中被打开的文件句柄 (file descriptor) 都会被子进程所继承。当然，套接字也是一种文件句柄，进程 A 可以创建一个套接字，此后当进程 A 调用 exec 启动一个新的子进程时，只要确保该套接字的 close_on_exec 标志位被清空，那么新的子进程就可以继承这个套接字。子进程看到的套接字和父进程创建的套接字是同一个系统套接字。</p>
+</li>
+<li><p>systemd并发解决D-Bus 依赖<br>D-Bus 是 desktop-bus 的简称，它是一个低延迟、低开销、高可用性的进程间通信机制。它越来越多地用于应用程序之间通信，同时也用于应用程序和操作系统内核之间的通信。很多系统服务进程都使用D-Bus 取代套接字作为进程间通信机制，对外提供服务。<br>假设如果服务 A 需要使用服务 B 的 D-Bus 服务，但是服务 B 并没有运行，则 D-Bus 可以在服务 A 请求服务 B 的 D-Bus 时自动启动服务 B。而服务 A 发出的请求会被 D-Bus 缓存，服务 A 会等待服务 B 启动就绪。这样，systemd依赖 D-Bus 的服务就可以实现并行启动。</p>
+</li>
+<li><p>systemd并发解决文件系统依赖<br>我们知道，Linux系统在启动的过程中，文件系统的启动是最耗时的，或者说依赖文件系统的进程的启动是相当地耗时的，比如挂载文件系统、各个磁盘配额的检测等与文件系统相关的进程执行是相当耗时的。在systemd启动系统框架中是可以解决这种不良的逻辑依赖，Linux的服务不需要等到文件系统初始化完成才可以成功启动。systemd是如何做到的呢，它集成了AutoFS的设计思路模式。AutoFS是一个程序，它使用Linux内核自动挂载器根据需要自动挂载文件系统，它通过内核 automounter 模块可以监测到某个文件系统挂载点真正被访问到的时候才触发挂载操作。<br>   比如目录/home，当系统启动的时候，systemd 为其创建一个临时的自动挂载点。在这个时刻/home 真正的挂载设备尚未启动好，真正的挂载操作还没有执行，文件系统检测也还没有完成。可是那些依赖该目录的进程已经可以并发启动，他们的 open()操作被内建在 systemd 中的 autofs 捕获，将该 open()调用挂起（可中断睡眠状态）。然后等待真正的挂载操作完成，文件系统检测也完成后，systemd 将该自动挂载点替换为真正的挂载点，并让 open()调用返回。由此，实现了那些依赖于文件系统的服务和文件系统本身同时并发启动。注意对于”/“根目录的依赖实际上一定还是要串行执行，因为 systemd 自己也存放在/之下，必须等待系统根目录挂载检查好。这种并发可以提高系统的启动速度，尤其是当/home 是远程的 NFS 节点，或者是加密盘等，需要耗费较长的时间才可以准备就绪的情况下，因为并发启动，这段时间内，系统可以利用这段空余时间启动其他服务，总的来说就大大缩短了系统启动时间。</p>
+</li>
+</ul>
+<hr>
+<ul>
+<li>1.3 systemd的启动顺序<br>在了解了systemd原理之后，我们可以知道：在systemd初始化系统机制中，不管程序的依赖关系，全部可以并行启动，调用的服务程序存在依赖关系，则自动激活其他程序。<br>以Ubuntu系统为例，systemd的启动顺序如下：<br>(1) Boot Sequence ，启动顺序，比如硬盘启动、软盘启动、u盘启动等<br>(2) Bootloader ，引导加载<br>(3) kernel + initramfs(initrd) ， 加载内核以及initramfs或initrd<br>(4) rootfs ， 文件系统<br>(5) /sbin/init ， 启动init进程<br>对与systemd的所有详细启动顺序情况，我们可以使用systemd本身自带的systemd-analyze，它是一个分析启动性能的工具，用于分析启动时服务时间消耗。默认显示启动是内核和用户空间的消耗时间，下面简单介绍systemd-analyze的基本用法。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 查看启动耗时</div><div class="line">$ systemd-analyze                                                                                       </div><div class="line"># 查看每个服务的启动耗时</div><div class="line">$ systemd-analyze blame</div><div class="line"># 显示瀑布状的启动过程流</div><div class="line">$ systemd-analyze critical-chain</div><div class="line"># 显示指定服务的启动流</div><div class="line">$ systemd-analyze critical-chain atd.service</div><div class="line"># 将systemd启动的顺序以及消耗的时间详细信息生成svg</div><div class="line">$ systemd-analyze plot &gt; message.svg</div></pre></td></tr></table></figure>
+<p>以Ubuntu为例，执行<code>systemd-analyze plot &gt; message.svg</code>命令生成的矢量图部分如下，充分直观地显示了systemd启动顺序以及消耗的时间。<br><img src="http://upload-images.jianshu.io/upload_images/1678789-e93c54328cd439db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="systemd"></p>
+<hr>
+<ul>
+<li>1.4 systemd的进程控制命令<br>Systemctl是一个systemd工具，主要负责控制systemd系统和服务管理器。<br>Systemctl工具集成了诸多的命令，使得管理员更好地控制管理Linux系统，首先我们来查看Systemctl的版本</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">➜  ~ systemctl --version</div><div class="line">systemd 229</div><div class="line">+PAM +AUDIT +SELINUX +IMA +APPARMOR +SMACK +SYSVINIT +UTMP +LIBCRYPTSETUP +GCRYPT +GNUTLS +ACL +XZ -LZ4 +SECCOMP +BLKID +ELFUTILS +KMOD -IDN</div></pre></td></tr></table></figure>
+<p><code>systemctl list-units</code>命令可以查看当前系统的所有 Unit<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 列出正在运行的Uint</div><div class="line">systemctl list-units</div><div class="line"># 列出所有的Uint</div><div class="line">systemctl list-uints --all</div><div class="line"># 列出所有没有运行的Uint</div><div class="line">systemctl list-units -all --state=inactive</div><div class="line"># 列出所有加载失败的Uint</div><div class="line">systemctl list-units --failed</div><div class="line"># 列出所有正在运行的、类型为service的Unit</div><div class="line">systemctl list-units --type=service</div></pre></td></tr></table></figure></p>
+<p><code>systemctl status</code>命令用于查看系统状态和单个 Unit 的状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 显示系统状态</div><div class="line">$ systemctl status</div><div class="line"># 显示单个 Unit 的状态，以mysql为例</div><div class="line">$ systemctl status mysql.service</div><div class="line"># 显示远程主机的某个 Unit 的状态，以mysql为例</div><div class="line">$ systemctl -H &#123;user&#125;@&#123;ip&#125; status mysql.service</div></pre></td></tr></table></figure></p>
+<p><code>systemctl {action}</code>对于用户来说，是常使用的命令，用于启动(start)、停止(stop)、重加载(reload)以及重启(restart) Unit（主要是 service），下面主要以以mysql为例。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"># 启动一个服务</div><div class="line">$  systemctl start mysql.service</div><div class="line"># 停止一个服务</div><div class="line">$ systemctl stop mysql.service</div><div class="line"># 重启一个服务</div><div class="line">$ systemctl restart mysql.service</div><div class="line"># 杀死一个服务的所有子进程</div><div class="line">$ systemctl kill mysql.service</div><div class="line"># 重新加载一个服务的配置文件</div><div class="line">$ systemctl reload mysql.service</div><div class="line"># 重载所有修改过的配置文件</div><div class="line">$ systemctl daemon-reload</div><div class="line"># 显示某个 Unit 的所有底层参数</div><div class="line">$ systemctl show mysql.service</div><div class="line"># 显示某个 Unit 的指定属性的值</div><div class="line">$ systemctl show -p CPUShares mysql.service</div><div class="line"># 设置某个 Unit 的指定属性</div><div class="line">$ sudo systemctl set-property mysql.service CPUShares=500</div></pre></td></tr></table></figure></p>
+<p><code>systemctl list-dependencies</code>命令，用于查看systemctl配置单元的依赖关系，以mysql为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 列出一个 mysql Unit 的所有依赖。</div><div class="line">$ systemctl list-dependencies mysql.service</div><div class="line"># 如果要展开 Target，就需要使用--all参数。</div><div class="line">$ systemctl list-dependencies --all mysql.service</div></pre></td></tr></table></figure></p>
+<p><code>systemctl enable/disable</code>命令，用于将systemd配置单元激活或撤销开机启动，以mysql为例<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 激活开机启动mysql服务</div><div class="line">$ systemctl enable mysql.service</div><div class="line"># 撤销开机启动mysql服务</div><div class="line">$ systemctl disable mysql.service</div></pre></td></tr></table></figure></p>
+<p><code>systemctl list-unit-files</code>命令，用于查看配置单元的所有文件(Unit File)以及配置单元的状态(Status)情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 列出所有配置文件</div><div class="line">$ systemctl list-unit-files</div><div class="line"># 列出指定类型的配置文件</div><div class="line">$ systemctl list-unit-files --type=service</div></pre></td></tr></table></figure></p>
+<p>对于Unit的状态包含如下四中情况：</p>
+<ul>
+<li>enabled：已建立启动链接，已激活即开机启动</li>
+<li>disabled：没建立启动链接，已撤销开机启动</li>
+<li>static：该配置文件没有[Install]部分，即无法被执行，只能作为其他配置文件的依赖</li>
+<li>masked：该配置文件被禁止建立启动链接</li>
+</ul>
+<p>systemd电源管理命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"># 重启机器	</div><div class="line">$ systemctl reboot	</div><div class="line"># 关机</div><div class="line">$ systemctl poweroff	</div><div class="line">#挂起	</div><div class="line">$ systemctl suspend	</div><div class="line"># 休眠</div><div class="line">$ systemctl hibernate		</div><div class="line"># 混合休眠模式</div><div class="line">$ systemctl hybrid</div></pre></td></tr></table></figure></p>
+<p>查看target中Unit组的状态及切换<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 切换target</div><div class="line">$ systemctl isolate multi-user.target</div><div class="line">$ systemctl isolate graphical.target</div><div class="line"># 获取默认的target</div><div class="line">$ systemctl get-default </div><div class="line"># 设置默认的target</div><div class="line">$ systemctl set-default multi-user.target</div></pre></td></tr></table></figure></p>
+<p><code>hostnamectl</code>命令查看与设置主机信息<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"># 查看主机信息</div><div class="line">$ hostnamectl</div><div class="line"># 设置主机信息，以设置hostname为例</div><div class="line">$ hostnamectl set-hostname &#123;$hostname&#125;</div></pre></td></tr></table></figure></p>
+<p><code>timedatectl</code>命令管理时区<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"># 查看时区日期等信息</div><div class="line">$ timedatectl</div><div class="line"># 设置主机的时区</div><div class="line">$ timedatectl set-timezone Asia/Shanghai</div><div class="line"># 将硬件时钟配置为地方时</div><div class="line">$ timedatectl set-local-rtc true</div></pre></td></tr></table></figure></p>
+<p>注意，在执行上述的命令中，*.service的后缀.service是可以省略不写的，其执行的结果是一样的。对于更多的systemd内置命令请到systemd官方wiki查阅。</p>
+<hr>
+<p>表1-1-2</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Description</td>
+<td>描述信息</td>
+</tr>
+<tr>
+<td style="text-align:center">Documentation</td>
+<td>文档URL等地址</td>
+</tr>
+<tr>
+<td style="text-align:center">Requires</td>
+<td>当前 Unit 依赖的其他 Unit，如果它们没有运行，当前 Unit 会启动失败</td>
+</tr>
+<tr>
+<td style="text-align:center">Wants</td>
+<td>与当前 Unit 配合的其他 Unit，如果它们没有运行，当前 Unit 不会启动失败</td>
+</tr>
+<tr>
+<td style="text-align:center">BindsTo</td>
+<td>与Requires类似，它指定的 Unit 如果退出，会导致当前 Unit 停止运行</td>
+</tr>
+<tr>
+<td style="text-align:center">Before</td>
+<td>如果该字段指定的 Unit 也要启动，那么必须在当前 Unit 之后启动</td>
+</tr>
+<tr>
+<td style="text-align:center">After</td>
+<td>如果该字段指定的 Unit 也要启动，那么必须在当前 Unit 之前启动</td>
+</tr>
+<tr>
+<td style="text-align:center">Conflicts</td>
+<td>这里指定的 Unit 不能与当前 Unit 同时运行</td>
+</tr>
+<tr>
+<td style="text-align:center">Condition…</td>
+<td>当前 Unit 运行必须满足的条件，否则不会运行</td>
+</tr>
+<tr>
+<td style="text-align:center">Assert…</td>
+<td>当前 Unit 运行必须满足的条件，否则会报启动失败</td>
+</tr>
+</tbody>
+</table>
+<p>表1-1-3</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">WantedBy</td>
+<td>它的值是一个或多个 Target，当前 Unit 激活时（enable）符号链接会放入/etc/systemd/system目录下面以 Target 名 + .wants后缀构成的子目录中</td>
+</tr>
+<tr>
+<td style="text-align:center">RequiredBy</td>
+<td>它的值是一个或多个 Target，当前 Unit 激活时，符号链接会放入/etc/systemd/system目录下面以 Target 名 + .required后缀构成的子目录中</td>
+</tr>
+<tr>
+<td style="text-align:center">Alias</td>
+<td>当前 Unit 可用于启动的别名</td>
+</tr>
+<tr>
+<td style="text-align:center">Also</td>
+<td>当前 Unit 激活时，会被同时激活的其他 Unit</td>
+</tr>
+</tbody>
+</table>
+<p>表1-1-4</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">字段</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Type</td>
+<td>定义启动时的进程行为。它有以下几种值</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=simple</td>
+<td>默认值，执行ExecStart指定的命令，启动主进程</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=forking</td>
+<td>以 fork 方式从父进程创建子进程，创建后父进程会立即退出</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=oneshot</td>
+<td>一次性进程，Systemd 会等当前服务退出，再继续往下执行</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=dbus</td>
+<td>当前服务通过D-Bus启动</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=notify</td>
+<td>当前服务启动完毕，会通知Systemd，再继续往下执行</td>
+</tr>
+<tr>
+<td style="text-align:center">Type=idle</td>
+<td>若有其他任务执行完毕，当前服务才会运行</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecStart</td>
+<td>启动当前服务的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecStartPre</td>
+<td>启动当前服务之前执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecStartPost</td>
+<td>启动当前服务之后执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecReload</td>
+<td>重启当前服务时执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecStop</td>
+<td>停止当前服务时执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">ExecStopPost</td>
+<td>停止当其服务之后执行的命令</td>
+</tr>
+<tr>
+<td style="text-align:center">RestartSec</td>
+<td>自动重启当前服务间隔的秒数</td>
+</tr>
+<tr>
+<td style="text-align:center">Restart</td>
+<td>定义何种情况 Systemd 会自动重启当前服务，可能的值包括always（总是重启）、on-success、on-failure、on-abnormal、on-abort、on-watchdog</td>
+</tr>
+<tr>
+<td style="text-align:center">TimeoutSec</td>
+<td>定义 Systemd 停止当前服务之前等待的秒数</td>
+</tr>
+<tr>
+<td style="text-align:center">Environment</td>
+<td>指定环境变量</td>
+</tr>
+</tbody>
+</table>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://samego.com/2017/03/11/Linux/systemd基础/" data-id="cj04r80hl000678ow3kutodo0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://samego.com/2017/03/11/Linux/systemd基础/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://samego.com/2017/03/11/Linux/systemd基础/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+    
+        <a href="/2017/03/05/Android/Android获取网络状态/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">Android获取网络状态</div>
+        </a>
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2017/03/11/Linux/systemd基础/" data-title="systemd基础" data-url="http://samego.com/2017/03/11/Linux/systemd基础/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/11/Linux/systemd基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/11/Linux/systemd基础/" class="title">systemd基础</a></p>
+                            <p class="item-date"><time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Android/Android获取网络状态/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Android/Android获取网络状态/" class="title">Android获取网络状态</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T12:19:58.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="title">Ubuntu动态一键切换python版本</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T09:37:37.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" class="title">那个程序员的Linux常用软件清单</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T08:41:51.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.jianshu.com/u/d3b98b758486">简书</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/alicance/">github</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Alic Feng<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'samego'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

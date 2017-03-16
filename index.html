@@ -152,7 +152,7 @@
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                4
+                5
                 <span>文章</span>
             </div>
             <div class="article-info-block">
@@ -193,6 +193,148 @@
 
             
             <section id="main">
+    <article id="post-Linux/Linux运维基础之编辑器" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2017/03/16/Linux/Linux运维基础之编辑器/">Linux运维基础之编辑器</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2017/03/16/Linux/Linux运维基础之编辑器/">
+            <time datetime="2017-03-16T14:13:41.000Z" itemprop="datePublished">2017-03-16</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/内核/">内核</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p><strong>初识Linux文本编辑器 </strong><br>​    文本编辑器是计算机处理文本的一款应用软件，主要用于文件的查看与编辑。文本编辑器对于所有使用过计算机的人并不默认，可谓众所周知。无论在生活还是工作上，每个计算机用户离不开文本编辑器的依赖，编辑器的用处范围特别广，在计算机的领域范围无处不见，比如查看文档、修改配置文件、存储文本信息数据等。编辑器的典型功能有如下：</p>
+<ul>
+<li>记录数据信息</li>
+<li>文字排版</li>
+<li>剪切、复制、粘贴</li>
+<li>撤销和恢复</li>
+<li>查找和替换 </li>
+</ul>
+<p>​    众多的计算机系统都有编辑器，Windows下常见的有记事本，Mac下常见的有编辑器，Linux系统也不例外，Linux系统下有众多的文本编辑器，比较出众的有vim、emacs、nano、gedit、sed以及awk等。sed和awk更多地体验在终端，也就是以指令的方式来使用。</p>
+<hr></p>
+            <p class="article-more-link">
+                <a href="/2017/03/16/Linux/Linux运维基础之编辑器/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://samego.com/2017/03/16/Linux/Linux运维基础之编辑器/" data-id="cj0chepcu0004dyownkgtqhg3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://samego.com/2017/03/16/Linux/Linux运维基础之编辑器/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://samego.com/2017/03/16/Linux/Linux运维基础之编辑器/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
     <article id="post-Linux/systemd基础" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
@@ -250,7 +392,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/11/Linux/systemd基础/" data-id="cj04r80hl000678ow3kutodo0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/11/Linux/systemd基础/" data-id="cj0chepcq0003dyowruv3xx9a" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -380,7 +522,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj04r80h9000378owy0ga8at2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj0chepd40007dyowy0rsmfpz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -513,7 +655,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj04r80he000478owjp44w1x3" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj0chepd70008dyow294mm16p" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -649,7 +791,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/" data-id="cj04r80hn000878ow2b42wcp9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/" data-id="cj0chepdb0009dyowr3swby2r" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -739,6 +881,25 @@
                     <li>
                         
                         <div class="item-thumbnail">
+                            <a href="/2017/03/16/Linux/Linux运维基础之编辑器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/16/Linux/Linux运维基础之编辑器/" class="title">Linux运维基础之编辑器</a></p>
+                            <p class="item-date"><time datetime="2017-03-16T14:13:41.000Z" itemprop="datePublished">2017-03-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
                             <a href="/2017/03/11/Linux/systemd基础/" class="thumbnail">
     
     
@@ -821,7 +982,7 @@
     <div class="widget-wrap">
         <h3 class="widget-title">归档</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">4</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">5</span></li></ul>
         </div>
     </div>
 

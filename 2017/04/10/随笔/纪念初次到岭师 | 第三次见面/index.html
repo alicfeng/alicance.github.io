@@ -3,20 +3,25 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Ubuntu动态一键切换python版本 | Alic Feng</title>
+    <title>纪念初次到岭师 | 第三次见面 | Alic Feng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
+    <meta name="description" content="​    清明假期刚过，我踏上了前往湛江海田的汽车，终点是岭南师范学院。此次的出行虽不远，但毕竟还是第一次去湛江，早上四月六号十点从海陵出发，回广州的那天已经是四月九号了，一共三天的时间。我为什么会去湛江呢？我问问自己，嗯～原来是想那谁了，我想去看看她，看看那一个令我心动的人。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Ubuntu动态一键切换python版本">
-<meta property="og:url" content="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/index.html">
+<meta property="og:title" content="纪念初次到岭师 | 第三次见面">
+<meta property="og:url" content="http://samego.com/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/index.html">
 <meta property="og:site_name" content="Alic Feng">
-<meta property="og:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-03-05T13:10:51.837Z">
+<meta property="og:description" content="​    清明假期刚过，我踏上了前往湛江海田的汽车，终点是岭南师范学院。此次的出行虽不远，但毕竟还是第一次去湛江，早上四月六号十点从海陵出发，回广州的那天已经是四月九号了，一共三天的时间。我为什么会去湛江呢？我问问自己，嗯～原来是想那谁了，我想去看看她，看看那一个令我心动的人。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-89a4e25b849855a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-d48e7e5883068e6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-834ca8d47b3bd838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-05b243185b5d2508.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-6f088e078414e67f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-9a539d96b5b900c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-11T15:39:02.389Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Ubuntu动态一键切换python版本">
-<meta name="twitter:description" content="前言ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="纪念初次到岭师 | 第三次见面">
+<meta name="twitter:description" content="​    清明假期刚过，我踏上了前往湛江海田的汽车，终点是岭南师范学院。此次的出行虽不远，但毕竟还是第一次去湛江，早上四月六号十点从海陵出发，回广州的那天已经是四月九号了，一共三天的时间。我为什么会去湛江呢？我问问自己，嗯～原来是想那谁了，我想去看看她，看看那一个令我心动的人。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1678789-89a4e25b849855a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
 
     
@@ -195,7 +200,7 @@
 </aside>
 
             
-            <section id="main"><article id="post-Linux/Ubuntu动态一键切换python版本" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-随笔/纪念初次到岭师 | 第三次见面" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -203,7 +208,7 @@
                 
     
         <h1 class="article-title" itemprop="name">
-            Ubuntu动态一键切换python版本
+            纪念初次到岭师 | 第三次见面
         </h1>
     
 
@@ -212,8 +217,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/">
-            <time datetime="2017-03-05T09:37:37.000Z" itemprop="datePublished">2017-03-05</time>
+        <a href="/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/">
+            <time datetime="2017-04-10T14:13:41.000Z" itemprop="datePublished">2017-04-10</time>
         </a>
     </div>
 
@@ -221,13 +226,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+        <a class="article-category-link" href="/categories/随笔/">随笔</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/python/">python</a>
+        <a class="tag-link" href="/tags/情感/">情感</a>, <a class="tag-link" href="/tags/日记/">日记</a>
     </div>
 
                     </div>
@@ -238,17 +243,76 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><strong><strong>前言</strong></strong><br>ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。<br>于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！</p>
+            <p>​    清明假期刚过，我踏上了前往湛江海田的汽车，终点是岭南师范学院。此次的出行虽不远，但毕竟还是第一次去湛江，早上四月六号十点从海陵出发，回广州的那天已经是四月九号了，一共三天的时间。我为什么会去湛江呢？我问问自己，嗯～原来是想那谁了，我想去看看她，看看那一个令我心动的人。</p>
 <a id="more"></a>
-<hr>
-<p>时日不多，赶紧用python！<br>昨晚失眠，起来写脚本，然而文章就诞生了！</p>
-<hr>
-<p><strong><strong>解决方案</strong></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#安全备份</span></div><div class="line">sudo cp /usr/bin/python /usr/bin/python_default</div><div class="line"><span class="comment">#切换版本 实质上就是创建软链</span></div><div class="line">sudo ln <span class="_">-s</span> /usr/bin/python3.4 /usr/bin/python</div></pre></td></tr></table></figure></p>
-<hr>
-<p><strong><strong>动态一键切换python版本</strong></strong><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#!/bin/bash</span></div><div class="line"></div><div class="line"><span class="comment">#--------config----------start</span></div><div class="line"><span class="comment">#备份目录</span></div><div class="line">pythonDir=<span class="string">"/usr/bin/pythonAlic/"</span></div><div class="line"><span class="comment">#--------config----------end</span></div><div class="line"></div><div class="line">index=0</div><div class="line">pythonarray[0]=<span class="string">"null"</span></div><div class="line"></div><div class="line"><span class="keyword">if</span> [ <span class="variable">$&#123;UID&#125;</span> == 0 ];<span class="keyword">then</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"请选择您要切换python的版本:"</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"1. 初始化程序与备份"</span></div><div class="line">	<span class="comment">#判断配置目录是否存在</span></div><div class="line">	<span class="keyword">if</span> [ -x <span class="variable">$pythonDir</span> ];<span class="keyword">then</span></div><div class="line">		<span class="comment">#遍历目录下的文件----------start</span></div><div class="line">		dir=$(ls <span class="_">-l</span> <span class="variable">$&#123;pythonDir&#125;</span> |awk <span class="string">'&#123;print $NF&#125;'</span>)</div><div class="line">		<span class="keyword">for</span> i <span class="keyword">in</span> <span class="variable">$dir</span></div><div class="line">		<span class="keyword">do</span></div><div class="line">			<span class="comment">#过滤文件----------start</span></div><div class="line">			((index++))</div><div class="line">			<span class="keyword">if</span> [ <span class="variable">$index</span> <span class="_">-eq</span> 1 ];<span class="keyword">then</span></div><div class="line">				<span class="built_in">continue</span></div><div class="line">			<span class="keyword">else</span></div><div class="line">				after=<span class="variable">$&#123;i:0-1&#125;</span></div><div class="line">				<span class="keyword">if</span> [ <span class="string">"<span class="variable">$after</span>"</span> <span class="_">-gt</span> 0 ] 2&gt;/dev/null ;<span class="keyword">then</span></div><div class="line">					str=<span class="string">"<span class="variable">$&#123;index&#125;</span>. 切换<span class="variable">$&#123;i&#125;</span>"</span></div><div class="line">					<span class="comment">#echo $str</span></div><div class="line">					pythonarray[<span class="variable">$index</span>]=<span class="variable">$str</span></div><div class="line">					<span class="built_in">echo</span> <span class="variable">$&#123;pythonarray[$index]&#125;</span></div><div class="line">				<span class="keyword">else</span></div><div class="line">					((index--))</div><div class="line">				<span class="keyword">fi</span></div><div class="line">			<span class="keyword">fi</span></div><div class="line">			<span class="comment">#过滤文件----------end</span></div><div class="line">		<span class="keyword">done</span></div><div class="line">	<span class="keyword">else</span></div><div class="line">		<span class="built_in">echo</span> <span class="string">"程序首次运行，请先执行1选项"</span></div><div class="line">	<span class="keyword">fi</span></div><div class="line">	<span class="comment">#遍历目录下的文件----------end</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"------------------------------"</span></div><div class="line">	<span class="comment">#开始操作</span></div><div class="line">	<span class="built_in">read</span> -p <span class="string">"请选择您要切换python的版本:"</span> option</div><div class="line">	</div><div class="line">	<span class="keyword">if</span> [ <span class="variable">$option</span> == 1 ]; <span class="keyword">then</span></div><div class="line">		<span class="keyword">if</span> [ -x <span class="variable">$pythonDir</span> ]; <span class="keyword">then</span></div><div class="line">			rm -rf <span class="variable">$pythonDir</span>	</div><div class="line">			<span class="built_in">echo</span> <span class="string">"重置目录成功"</span></div><div class="line">		<span class="keyword">fi</span></div><div class="line">		mkdir <span class="variable">$pythonDir</span>	</div><div class="line">		<span class="built_in">echo</span> <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>python_default"</span></div><div class="line">		`cp /usr/bin/python <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>python_default"</span>`</div><div class="line">		`cp /usr/bin/python* <span class="string">"<span class="variable">$&#123;pythonDir&#125;</span>"</span>`</div><div class="line">		<span class="built_in">echo</span> <span class="string">"备份文件完成"</span></div><div class="line">	<span class="keyword">fi</span></div><div class="line">	<span class="keyword">for</span> ((i=1;i&lt;=<span class="variable">$&#123;index&#125;</span>;i++));</div><div class="line">	<span class="keyword">do</span></div><div class="line">		key=<span class="variable">$&#123;pythonarray[$i]:0:1&#125;</span></div><div class="line">		<span class="comment">#echo $key</span></div><div class="line">		<span class="keyword">if</span> [ <span class="string">"<span class="variable">$&#123;option&#125;</span>"</span> == <span class="string">"<span class="variable">$&#123;key&#125;</span>"</span> ]; <span class="keyword">then</span></div><div class="line">			<span class="comment">#开始切换版本操作----------start</span></div><div class="line">			pyname=<span class="variable">$&#123;pythonarray[$i]:5&#125;</span></div><div class="line">			rm /usr/bin/python</div><div class="line">			ln <span class="_">-s</span> /usr/bin/<span class="variable">$pyname</span> /usr/bin/python</div><div class="line">			<span class="built_in">echo</span> <span class="string">"版本已经切换至<span class="variable">$pyname</span>"</span></div><div class="line">			<span class="comment">#开始切换版本操作----------end</span></div><div class="line">		<span class="keyword">fi</span></div><div class="line">	<span class="keyword">done</span></div><div class="line"><span class="keyword">else</span></div><div class="line">	<span class="built_in">echo</span> <span class="string">"您没有权限~~~"</span></div><div class="line"><span class="keyword">fi</span></div></pre></td></tr></table></figure></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/1678789-390216c47eb70fe6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="Shell"></p>
-<hr>
-<p><strong><strong><a href="https://github.com/alicance" target="_blank" rel="external">价值源于技术，贡献源于分享</a></strong></strong></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-89a4e25b849855a7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="岭南师范学院"></p>
+<p>​    这次刚好是第三次见面，我依然很清楚地记得我和她前两次见面的场景，第一次：2017-02-01( 即大年初五 )我和几个朋友去阳春逛逛，同时我去到了那谁家，路上感觉到了山路的十九弯，寨似乎优点偏僻，那次记忆犹新，我被那谁拉扯一定要吃饭再走，但我还是没有吃饭就回去了，被那谁家人的热情搞得很不好意思；第二次：2017-02-05(接近那谁回校的时间)，这次是我叫你下来海陵玩的，没想到你真的下来了，我也没有足够的准备，我只带你去看了电影、上风车山、逛红树林( 爬老鼠山 )、游十里银滩… ，很激动～第二次见面时我和那谁牵手了！第三次：也就是我这次前往岭师，我想那谁了，我就去看她了～</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-d48e7e5883068e6e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="风车山"></p>
+<p><strong>我想那谁了，我去了岭师</strong></p>
+<p>《2017.04.06》</p>
+<ul>
+<li><p><strong>初到岭师</strong></p>
+<p>​早上一大清早，大叔我就起来，可能是傻怡的原因、我笑醒了(^o^)/~。懒懒的我早上才收拾行李，可能有些赶了，我还有一件衣服忘记拿了，不过也没啥，后来我和傻怡上街买了。吃完早餐过后，差不多十点了，我拿着我的行李包以及我婆早上弄的蛋糕、印子就出发了，对了～还带了一点阳江特产( 海味 )。经过了两个多小时的时间终于抵达湛江海田区。</p>
+<p>​嗯～我终于和我想念的人见面了，我在岭师附中运动场和傻怡见面了。那谁戴着帽子、背着双肩包包，小的还是那么甜，也不知道为什么，我特别喜欢看那谁那张傻笑的面孔。那谁带着我走进了岭师校园，学校很大也很美，我跟着傻怡走，那谁一边走一边介绍校园的特色与位置，我原本不是路痴，可是我走进了学校里面，我却变路痴了，怎么说呢？我走不出来，O(∩_∩)O哈！</p>
+</li>
+<li><p><strong>看电影</strong></p>
+<p>​    放完我的行李以及吃的东西后，那谁就带上我，大傻带上傻怡就去爱华广场看电影了，我们购买了八点五十分的《金刚：咕噜岛》，不过还早，我就带上傻怡去找吃的来填饱肚子，不不不～应该是那谁带上我，我快一天都没有吃东西了，于是傻怡带我去步行街找吃的。此时我们的目的很简单，找吃的、能填饱肚子的就行，逛了整条步行街都没有找到吃的，可能是那个吃货没怎么留意到，我们都走到了街尾了，最后我们在麦当劳点了一点吃的，我平时不怎么吃这些，但还是填饱肚子勒。八点多了，那谁和我就出发去看电影了。这我是和那谁第二次去看电影，第一次在海陵南海湾环球国际影城看《极限特工：终极回归》。在观影的过程中，那谁被金刚与骷髅战斗、章鱼吃金刚、蜘蛛肚子被爆几个剧情场景吓到了，吓得抱着我的脖子打呼，真是无眼看～:-D。</p>
+</li>
+</ul>
+<p>《2017.04.07》</p>
+<ul>
+<li><p><strong>逛街</strong></p>
+<p>​    早上起来我就去找那谁了，额～突然想起早上起来第一件事就去体育馆拿快递了( 水杯、纸巾 )O(∩_∩)O哈哈~，然后才去找那谁的。想想～我吃早餐了吗？额～傻怡带我去饮早茶了，点了两个粥、一笼凤爪、一碗猪肚和一笼蒸饺，吃的很饱很饱，然后我们才去逛街的。我们依然还是在步行街逛街，和傻怡逛街试衣服试到累，但很开心☺，怎么说呢，进一间店铺，试衣服可以试四五件的，不过那谁比我试的更多…真是离嗮大谱，我就喜欢傻怡试穿衣服，用眼力欣赏欣赏就可以了。那谁总是说自己胖、有肚腩、手臂粗，哈哈～无眼看。逛了大概两个小时的街，总算买到衣服了，不过后来听傻怡说均码那一件衣服还是不合身。这次和傻怡逛街逛衣服，听傻怡说的最多的就是：”我这么胖～”，我的天呐，怕没有衣服穿:-)，其实不胖，可能就是稍微那么一点点微胖，我钟意。逛了也有一会了，那个爱吃的家伙又带我去吃，在步行街吃自助餐，额吃斋的那一种，也有肉，再怎么斋也不能少了那谁的鸡翅膀，这次吃斋的过程，我深深体会到了傻怡的肚子是无底洞，哈哈\(^o^)/~，其实是这样子的，快要吃饱了准备去湛江南国花卉市场双双赢桑葚园摘桑葚的，久久再吃一点、再吃一点，要是我现在能经常这样该多好，肯定成肥仔，咦～想想都胖了。</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>摘桑葚</strong></p>
+<p>​    吃饱了，接下来我们就准备去双双赢桑葚园摘桑葚，过程很”11路“，但毕竟有吃的，我就笑一笑。我导航了一下路线，接下来和那谁去坐公交，赤坎的交通很不一样，有些路是单行道的，突然想到上一次在佛山黄岐坐了反向的公交车，然后在中途下了车，找不到正向回去的路，只好继续再坐错车。去的时候我们中途转了一次车，因为那谁晕车，我们还步行过一个站再坐车的，一路坐车终于到了终点站，可是～可是～我们还需要走一段路，微信介绍还有大约三公里的路程( 沿着湖光农场的方向，不转左不转右一直走 )，走了大概30分钟的时间才到的，傻怡还以为走错了呢，去到桑葚园已是四点四十多了，傻怡带上我惜时地走进桑园摘桑葚，我的天呐，里面的桑树很多桑葚，部分熟得透紫，额～很甜，记得小时候种过吃过，没有这么大这么甜，距离上一次吃桑葚已经过去了十多年了。这次吃的时候是和傻怡在湛江桑园吃，额～想想都开心。和那谁吃了大概有差不多半斤，还打包了一盒回学校。五点半了～桑园下班了，我们也回去了，呀～我的天呐，还得走三公里的路程才能坐公交，傻怡七点半还得回学校上课呢，走走走～比来的时间还要长，到了南国花卉市场公交站，but没车，等到快七点时班车才来到了，快七点半的时候才将傻怡带回学校，刚好来得及上课。上课前，傻怡吩咐我去爱华广场拿寄存在超市储存柜的衣服，我才不去呢:-D，不是不去，我也想去，额我不认识路出校门口，哈哈怪学校太大了，那谁下课后就冯大叔过去拿了，刚刚好来得及，我们的储存柜被工作人员打开了，很幸运～。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-834ca8d47b3bd838.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="摘桑葚"></p>
+</li>
+<li><p><strong>吃宵夜</strong></p>
+<p>​    从爱华广场回学院，那个爱吃的家伙又带我去吃喝粥，想想都胖了。我们在北街回宿舍的那条路上点了一个虾蟹粥、番薯叶以及咸鱼茄子煲，饱饱的，还点了两碗糖水，这么多恰好让我吃的饱饱的，有力气和蚊子作战，在岭师已经和蚊子玩了三个晚上，我的天呐～不分胜负。</p>
+<p>​</p>
+</li>
+</ul>
+<p>《2017.04.08》</p>
+<ul>
+<li><p><strong>吃披萨</strong></p>
+<p>​    早上起来第一件事依然没变，还是去找那谁。傻怡带大傻去上次买玉米的面包店买早餐，买了两盒肠粉+一笼蒸饺，不过呢，肠粉几乎都是我吃了，超级饱～然而去足球场坐逛了大半个小时。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-05b243185b5d2508.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="足球场"></p>
+<p>​    此时，傻怡又带我逛了一下校园，那谁想我进图书馆逛逛的，而我却想和傻怡一起进去，不过我们还是没有进去。</p>
+<p>​    中午了，爱吃的那谁带我去寸金公园对面的榴莲披萨店吃披萨，我觉得呢，这里的披萨味道还好就是偏贵。说到披萨呢，我好像是第二次吃，不太记得了。中午太热了，我在店里吃了一个多小时，在湛江，我感受到了夏天的温度湛江比广州还要热一点，不过也没啥，够晒太阳习惯了( 我中国人黑皮肤:-D )。额，那头猪吃饱了就困了，靠着我睡了一会。离嗮大谱～吃饱了就困了，原来那谁是一头懒猪。</p>
+<p>​</p>
+</li>
+</ul>
+<ul>
+<li><p><strong>逛金沙湾</strong></p>
+<p>​    还是一样，那谁晕车的，我和傻怡又是先步行一段路，再乘车过金沙湾。先从爱华广场往步行街步行到凯德广场，既然到了凯德广场，外面太热，于是进里面逛了一圈，买了两条雪糕滋润滋润，还买了一瓶沙拉酱，弄点水果沙拉给那个猪头吃，这几天都吃了热气的东西。最后，那谁和我在凯德滴滴过去金沙湾。</p>
+<p>​    第一眼看到金沙湾的景色，我觉得不咋地，也许从小就在海边长大，但是好的是：金沙湾这片海似乎都是自由游玩的，没什么限制，我很欣赏这一点！在这个下午，和傻怡逛传说中湛江湾最美的曲线休闲湾区，这个湛江金沙湾很多游客，类似一个mini型的海南岛，可是～可是～手机没电了，没有拍多几张照片。傻怡那个猪头却还得回学校开会，和前一天时间一样 – 七点半。所以呢，还得找点食物填饱肚子，哪里吃呢？傻怡带我去一个名叫” 悦丽** “的地方，额～点了一壶菊花茶、一个酸菜鱼、一个番薯叶、还有两碗饭，O(∩_∩)O哈哈~，然后就吃饱了。此时距离上课又和次晚一样，仅剩半个小时，得赶紧滴滴回去。哎╮(╯▽╰)╭那谁又扔了我跑去开会了，说好的带上我呢，心塞～</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-6f088e078414e67f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="逛金沙湾"></p>
+<p>​</p>
+</li>
+<li><p><strong>吃沙拉</strong></p>
+<p>​    算了，怪我没有跟紧傻怡没有跑去和她开会。那我只好逛逛校园，我在足球场转了一圈、在篮球场看了半个小时的球赛，趁还有时间，我往北街那边去买了点水果( 一个苹果、一个梨子、一个芒果、一个忘记名字了、两根香蕉、两个番茄 ) ，买好水果后那谁差不多下课了，还是在体育馆正门等她，记得在那里坐这差点就睡了。接下来，我俩就去足球场弄水果沙拉，那个猪头一边屑说过一边吃，我的天呢，嘴馋～</p>
+<p>​    也许好久都没有看星星了，看到星星甚是激动，几乎都忘了星星长什么样子，湛江的夜空很晴朗、很美，或许和心动的人才有此番心情来欣赏夜空中的星星，对了～记得此时的月亮很圆很亮，我还以为那天是旧历十五六。傻怡躺在我的大腿上，吃饱了像一头大懒猪似得，不想动～我摸着傻怡的肚子，不，应该说肚腩的，O(∩_∩)O哈哈~，肉肉的感觉，真想拿出一块来弄点酸菜五花肉来尝尝。</p>
+<p>​</p>
+</li>
+<li><p><strong>清风的吻，出动了明月的情</strong></p>
+<p>​    和那谁聊着聊着，慢慢地，我和那谁亲嘴了，那是我第一次亲吻傻怡，感觉很奇妙，也不知怎么形容了，就知道此时的傻怡是我的。问了你的唇，愿最后一个与我相伴的人是那谁。想想，似乎我也还没有向你表白，我就亲你了，那谁，等着！</p>
+<p>​</p>
+</li>
+</ul>
+<p>《2017.04.09》</p>
+<ul>
+<li><p><strong>回广州学院</strong></p>
+<p>​    前往岭师见你，既然相见，必然会有离别。</p>
+<p>​    买了九点十分的车票，早上早早就起来了，收拾行李，想和傻怡再一起吃过早餐再回去，本来呢，那谁说要用次晚买的那两个番茄煮面给我吃的，太麻烦了。依然是老地方等傻怡，我和那谁过考研培训机构附近那里喝了粥，然后傻怡将我送到体育馆坐车站点，嗯～我就回去了，只是不知道那谁有没有想我想那谁一样想着我。</p>
+</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-9a539d96b5b900c3.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="with u"></p>
+<p><strong>渐渐地，我心中有了你</strong></p>
+<p><strong>也许，幸而遇见、久而倾心</strong></p>
+<p><strong>那谁～ 等你</strong></p>
 
         
         </div>
@@ -259,7 +323,7 @@
 
 </div>
 
-    <a data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj1dpqser000bgrowriv6jw5m" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://samego.com/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/" data-id="cj1dpqsef0006growburlqy91" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -327,7 +391,7 @@
 
             
     
-        <a href="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/">评论</a>
+        <a href="http://samego.com/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/#comments" class="article-comment-link ds-thread-count" data-thread-key="http://samego.com/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/">评论</a>
     
 
         </footer>
@@ -336,19 +400,10 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/03/05/Android/Android获取网络状态/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    Android获取网络状态
-                
-            </div>
-        </a>
     
-    
-        <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" id="article-nav-older" class="article-nav-link-wrap">
+        <a href="/2017/03/16/Linux/Linux运维基础之编辑器/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">那个程序员的Linux常用软件清单</div>
+            <div class="article-nav-title">Linux运维基础之编辑器</div>
         </a>
     
 </nav>
@@ -362,7 +417,7 @@
     <section id="comments">
     
         
-    <div class="ds-thread" data-thread-key="2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-title="Ubuntu动态一键切换python版本" data-url="http://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/"></div>
+    <div class="ds-thread" data-thread-key="2017/04/10/随笔/纪念初次到岭师 | 第三次见面/" data-title="纪念初次到岭师 | 第三次见面" data-url="http://samego.com/2017/04/10/随笔/纪念初次到岭师 | 第三次见面/"></div>
     <style>
         #ds-thread #ds-reset .ds-textarea-wrapper {
             background: none;

@@ -5,22 +5,16 @@
     
     <title>Android获取网络状态 | Alic Feng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
-
-实现步骤流程：">
+    <meta name="description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android获取网络状态">
 <meta property="og:url" content="https://samego.com/2017/03/05/Android/Android获取网络状态/index.html">
 <meta property="og:site_name" content="Alic Feng">
-<meta property="og:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
-
-实现步骤流程：">
-<meta property="og:updated_time" content="2017-03-05T13:09:44.137Z">
+<meta property="og:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。">
+<meta property="og:updated_time" content="2017-04-15T07:57:50.859Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Android获取网络状态">
-<meta name="twitter:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。
-
-实现步骤流程：">
+<meta name="twitter:description" content="前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。">
     
 
     
@@ -238,10 +232,9 @@
         
             
             <p>前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。</p>
-<hr>
-<p><strong>实现步骤流程：</strong></p>
 <a id="more"></a>
-<p>1 .获取ConnectivityManager对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）</div><div class="line">Context context = activity.getApplicationContext();</div><div class="line">ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>实现步骤流程：</strong><br>1 .获取ConnectivityManager对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">// 获取手机所有连接管理对象（包括对wi-fi,net等连接的管理）</div><div class="line">Context context = activity.getApplicationContext();</div><div class="line">ConnectivityManager connectivityManager = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);</div></pre></td></tr></table></figure></p>
 <p>2、获取NetworkInfo对象<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">// 获取NetworkInfo对象</div><div class="line">NetworkInfo[] networkInfo = connectivityManager.getAllNetworkInfo();</div></pre></td></tr></table></figure></p>
 <p>3、判断当前网络状态是否为连接状态<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">if (networkInfo[i].getState() == NetworkInfo.State.CONNECTED)&#123; </div><div class="line">   return true;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>4、在AndroidManifest.xml中添加访问当前网络状态权限<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;uses-permission android:name=&quot;android.permission.ACCESS_NETWORK_STATE&quot;&gt;&lt;/uses-permission&gt;</div></pre></td></tr></table></figure></p>
@@ -282,7 +275,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj1iyw7i50004tsown3xl08dm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj1iz057c00035powitjnjfo4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -359,7 +352,7 @@
         
 <nav id="article-nav">
     
-        <a href="/2017/03/11/Linux/systemd基础/" id="article-nav-newer" class="article-nav-link-wrap">
+        <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" id="article-nav-newer" class="article-nav-link-wrap">
             <strong class="article-nav-caption">上一篇</strong>
             <div class="article-nav-title">
                 
@@ -478,7 +471,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/03/11/Linux/systemd基础/" class="thumbnail">
+                            <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -489,7 +482,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
-                            <p class="item-title"><a href="/2017/03/11/Linux/systemd基础/" class="title">systemd基础</a></p>
+                            <p class="item-title"><a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="title">systemd基础</a></p>
                             <p class="item-date"><time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time></p>
                         </div>
                     </li>

@@ -248,7 +248,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/04/11/Heart-Love/纪念初次到岭师 | 第三次见面/" data-id="cj1iyw7i00003tsowudiwzbvp" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/04/11/Heart-Love/纪念初次到岭师 | 第三次见面/" data-id="cj1iz057l00065pow88o1uye1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -368,16 +368,7 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p><strong>初识Linux文本编辑器 </strong><br>​    文本编辑器是计算机处理文本的一款应用软件，主要用于文件的查看与编辑。文本编辑器对于所有使用过计算机的人并不默认，可谓众所周知。无论在生活还是工作上，每个计算机用户离不开文本编辑器的依赖，编辑器的用处范围特别广，在计算机的领域范围无处不见，比如查看文档、修改配置文件、存储文本信息数据等。编辑器的典型功能有如下：</p>
-<ul>
-<li>记录数据信息</li>
-<li>文字排版</li>
-<li>剪切、复制、粘贴</li>
-<li>撤销和恢复</li>
-<li>查找和替换 </li>
-</ul>
-<p>​    众多的计算机系统都有编辑器，Windows下常见的有记事本，Mac下常见的有编辑器，Linux系统也不例外，Linux系统下有众多的文本编辑器，比较出众的有vim、emacs、nano、gedit、sed以及awk等。sed和awk更多地体验在终端，也就是以指令的方式来使用。</p>
-<hr></p>
+            <p><p><strong>初识Linux文本编辑器 </strong><br>​    文本编辑器是计算机处理文本的一款应用软件，主要用于文件的查看与编辑。文本编辑器对于所有使用过计算机的人并不默认，可谓众所周知。无论在生活还是工作上，每个计算机用户离不开文本编辑器的依赖，编辑器的用处范围特别广，在计算机的领域范围无处不见，比如查看文档、修改配置文件、存储文本信息数据等。编辑器的典型功能有如下：</p></p>
             <p class="article-more-link">
                 <a href="/2017/03/16/Linux/Linux运维基础之编辑器/#more">查看更多</a>
             </p>
@@ -390,7 +381,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/16/Linux/Linux运维基础之编辑器/" data-id="cj1iyw7ic0008tsowcuur9ppj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/16/Linux/Linux运维基础之编辑器/" data-id="cj1iz057s000b5pow3foleor8" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -468,7 +459,7 @@
 
 
 
-    <article id="post-Linux/systemd基础" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-Linux/Linux运维基础之systemd基础" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -476,7 +467,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2017/03/11/Linux/systemd基础/">systemd基础</a>
+            <a class="article-title" href="/2017/03/11/Linux/Linux运维基础之systemd基础/">systemd基础</a>
         </h1>
     
 
@@ -485,7 +476,7 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/03/11/Linux/systemd基础/">
+        <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/">
             <time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time>
         </a>
     </div>
@@ -511,10 +502,10 @@
         <div class="article-entry" itemprop="articleBody">
         
             <p><h4 id="systemd基础"><a href="#systemd基础" class="headerlink" title="systemd基础"></a>systemd基础</h4><ul>
-<li><strong><strong> 1.1 systemd的简介 </strong></strong><br>计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质量，一方面尽可能地减少进程已经将进程并行启动，另一方面就是更好地守护init进程，减少系统内存的不必要的开销。当然在systemd诞生之前呢，还有两个系统初始化的系统：systemvinit以及upstart，systemvinit是一套传统的初始化系统，已经逐渐地淡出了Linux历史舞台，然而被systemd和upstart取而代之，systemd和upstart它们有着各自的特点，不过目前已经有绝大多数的Linux发行版都采取了systemd，比如Fedora、openSUSE、Ubuntu、Gentoo、Arch Linux等一系列Linux发行版。<br>Linux系统启动要执行的程序是非常多的，比如挂载文件系统、加载硬件设备、启动后台服务、激活交换分区、启动用户程序等。每一个执行任务被systemd称为一个配置单元(uint)，换句话来说呢，挂在一个文件系统被称为一个配置单元、加载硬件设备被称为一个配置单元、启动系统后台服务被称为一个配置单元，等等。systemd包含了很多种不同类型的配置单元，在这里为什么写明具体有多少种类型的配置单元呢，很简单：因为当前systemd被诸多的Linux发行版系统推上了发展的热潮并一直在更新以及开发新的配置单元。以下就是目前systemd所包含的一些配置单元。</li>
+<li><strong><strong> 1.1 systemd的简介 </strong></strong><br>计算机在启动一个操作系统必须加载并初始化操作系统，方能运行其他的应用程序，这是计算机初始化必不可少的一个启动过程，也就是说计算机启动需要一款初始化系统。systemd是Red Hat软件开发工程师Lennart Poettering以及Kay Sievers最初研发的一套Linux系统中最新的初始化系统，systems旨在能提高系统的启动效率与质量，一方面尽可能地减少进程已经将进程并行启动，另一方面就是更好地守护init进程，减少系统内存的不必要的开销。当然在systemd诞生之前呢，还有两个系统初始化的系统：systemvinit以及upstart，systemvinit是一套传统的初始化系统，已经逐渐地淡出了Linux历史舞台，然而被systemd和upstart取而代之，systemd和upstart它们有着各自的特点，不过目前已经有绝大多数的Linux发行版都采取了systemd，比如Fedora、openSUSE、Ubuntu、Gentoo、Arch Linux等一系列Linux发行版。</li>
 </ul></p>
             <p class="article-more-link">
-                <a href="/2017/03/11/Linux/systemd基础/#more">查看更多</a>
+                <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/#more">查看更多</a>
             </p>
         
         </div>
@@ -525,7 +516,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/11/Linux/systemd基础/" data-id="cj1iyw7ih0009tsow507xekz2" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/11/Linux/Linux运维基础之systemd基础/" data-id="cj1iz057g00045powy4oyvgzc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -593,7 +584,7 @@
 
             
     
-        <a href="https://samego.com/2017/03/11/Linux/systemd基础/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2017/03/11/Linux/systemd基础/">评论</a>
+        <a href="https://samego.com/2017/03/11/Linux/Linux运维基础之systemd基础/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2017/03/11/Linux/Linux运维基础之systemd基础/">评论</a>
     
 
         </footer>
@@ -640,9 +631,7 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p>前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。</p>
-<hr>
-<p><strong>实现步骤流程：</strong></p></p>
+            <p><p>前言：在开发安卓移动端时，几乎每一个app都需要连接网络，因此，对设备的网络状态检测是很有必要的！比如：检测当前网络是否可用，当前可用的网络是属于WIFI还是MOBILE等等。</p></p>
             <p class="article-more-link">
                 <a href="/2017/03/05/Android/Android获取网络状态/#more">查看更多</a>
             </p>
@@ -655,7 +644,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj1iyw7i50004tsown3xl08dm" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/05/Android/Android获取网络状态/" data-id="cj1iz057c00035powitjnjfo4" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -788,7 +777,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj1iyw7ia0007tsowwuf9zgv6" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj1iz057n00085pow8lcgiazw" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -910,7 +899,6 @@
         
             <p><blockquote>
 <p>记得刚开始接触Linux的时候是大学二年级，使用Linux的时间也有一年多了，至于为何会接触到此系统呢，归于一个带我飞的大学同学<strong>左蓝</strong>。在这一年多的时间里，使用的最多的Linux系统是基于debian发行版系列的Ubuntu，对于它的简介呢，那就<a href="https://zh.wikipedia.org/wiki/Ubuntu">维基百科ubuntu</a>。我旨在记录并分享我在ubuntu的深渊使用过并觉得推荐的应用或工具，要是你有更好的推荐希望留言或简信，THX</p>
-<p>为了更方便安装该软件或应用，已经编写好了一个Shell-<a href="https://github.com/alicance/Alic_env/blob/master/dever/AShellTools.sh">AShellTools</a>。Constantly update …</p>
 </blockquote></p>
             <p class="article-more-link">
                 <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/#more">查看更多</a>
@@ -924,7 +912,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/" data-id="cj1iyw7ij000ctsowdnojky5y" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/" data-id="cj1iz057r00095powvyd1bget" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -1052,7 +1040,7 @@
                     <li>
                         
                         <div class="item-thumbnail">
-                            <a href="/2017/03/11/Linux/systemd基础/" class="thumbnail">
+                            <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="thumbnail">
     
     
         <span class="thumbnail-image thumbnail-none"></span>
@@ -1063,7 +1051,7 @@
                         
                         <div class="item-inner">
                             <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
-                            <p class="item-title"><a href="/2017/03/11/Linux/systemd基础/" class="title">systemd基础</a></p>
+                            <p class="item-title"><a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="title">systemd基础</a></p>
                             <p class="item-date"><time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time></p>
                         </div>
                     </li>

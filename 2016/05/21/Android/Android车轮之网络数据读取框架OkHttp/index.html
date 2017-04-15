@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <meta charset="utf-8">
+    
+    <title>Android车轮之网络数据读取框架OkHttp | Alic Feng</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="OkHttp框架的介绍现在Android网络数据处理方面的第三方库文件还是不少的，比如：Volley，Retrofit，HttpClient，OKHttp等等，HttpClient库已经在Android6.+被废弃啦，而目前OkHttp库的技术已经比较成熟，可以这么说：为了让您的应用运行更快、更高效、更节省流量，那么OkHttp库就是为此而生。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android车轮之网络数据读取框架OkHttp">
+<meta property="og:url" content="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/index.html">
+<meta property="og:site_name" content="Alic Feng">
+<meta property="og:description" content="OkHttp框架的介绍现在Android网络数据处理方面的第三方库文件还是不少的，比如：Volley，Retrofit，HttpClient，OKHttp等等，HttpClient库已经在Android6.+被废弃啦，而目前OkHttp库的技术已经比较成熟，可以这么说：为了让您的应用运行更快、更高效、更节省流量，那么OkHttp库就是为此而生。">
+<meta property="og:updated_time" content="2017-04-15T08:08:28.052Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android车轮之网络数据读取框架OkHttp">
+<meta name="twitter:description" content="OkHttp框架的介绍现在Android网络数据处理方面的第三方库文件还是不少的，比如：Volley，Retrofit，HttpClient，OKHttp等等，HttpClient库已经在Android6.+被废弃啦，而目前OkHttp库的技术已经比较成熟，可以这么说：为了让您的应用运行更快、更高效、更节省流量，那么OkHttp库就是为此而生。">
+    
+
+    
+
+    
+        <link rel="icon" href="/css/images/logo.png" />
+    
+
+    <link rel="stylesheet" href="/libs/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/libs/open-sans/styles.css">
+    <link rel="stylesheet" href="/libs/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/libs/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/libs/lightgallery/css/lightgallery.min.css">
+    
+    
+        <link rel="stylesheet" href="/libs/justified-gallery/justifiedGallery.min.css">
+    
+    
+    
+    
+
+
+</head>
+
+<body>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Alic Feng</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">首页</a>
+                
+                    <a class="main-nav-link" href="/categories">分类</a>
+                
+                    <a class="main-nav-link" href="/tags">标签</a>
+                
+                    <a class="main-nav-link" href="/about">关于</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar_kun.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
+
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
+
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">首页</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">分类</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">标签</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">关于</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
+
+        <div class="outer">
+            
+                
+
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar_kun.png" />
+            <h2 id="name">Alic Feng</h2>
+            <h3 id="title">Web &amp; App Developer</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>广州, 中国</span>
+            <a id="follow" target="_blank" href="mailto:a@samego.com">联系我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                7
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                9
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/alicance" target="_blank" title="github" >
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.facebook.com/alic.feng" target="_blank" title="facebook" >
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="https://www.linkedin.com/in/%E7%AB%8B%E7%81%BF-%E5%86%AF-7b92a3101/" target="_blank" title="linkedin" >
+                            <i class="fa fa-linkedin"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main"><article id="post-Android/Android车轮之网络数据读取框架OkHttp" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 class="article-title" itemprop="name">
+            Android车轮之网络数据读取框架OkHttp
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/">
+            <time datetime="2016-05-21T03:34:58.000Z" itemprop="datePublished">2016-05-21</time>
+        </a>
+    </div>
+
+
+                        
+    <div class="article-category">
+    	<i class="fa fa-folder"></i>
+        <a class="article-category-link" href="/categories/Android/">Android</a>
+    </div>
+
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/android/">android</a>, <a class="tag-link" href="/tags/okhttp/">okhttp</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p><strong><strong>OkHttp框架的介绍</strong></strong><br>现在Android网络数据处理方面的第三方库文件还是不少的，比如：Volley，Retrofit，HttpClient，OKHttp等等，HttpClient库已经在Android6.+被废弃啦，而目前OkHttp库的技术已经比较成熟，可以这么说：为了让您的应用运行更快、更高效、更节省流量，那么OkHttp库就是为此而生。</p>
+<a id="more"></a>
+<hr>
+<p><strong><strong>项目添加OkHttp框架</strong></strong><br>最新的版本为：okhttp-3.2.0.jar 、okio-1.7.0.jar   |  <a href="https://github.com/square/okhttp/pull/2082" target="_blank" rel="external">OkHttp框架Github</a><br>注意:使用OkHttp框架必须导入这两个库,OkHttp库要依赖okio库</p>
+<hr>
+<p>更新说明<br>2016..5.23 增加OkHttp原生的方法<br>以Request作为参数请求<br>使用方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">//原生的OkHttp方法 参数</div><div class="line">Request request = new Request.Builder().build();</div><div class="line">//原生的OkHttp方法 同步请求</div><div class="line">OkHttpManager.execute(request);</div><div class="line">//原生的OkHttp方法 异步请求 没回调</div><div class="line">OkHttpManager.enqueue(request);</div><div class="line">//原生的OkHttp方法 异步请求 有回调</div><div class="line">OkHttpManager.enqueue(request, new Callback() &#123;</div><div class="line">    @Override</div><div class="line">    public void onFailure(Call call, IOException e) &#123;</div><div class="line">        </div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong><strong>使用方法</strong></strong><br>在此就不必啰嗦啦 - <a href="https://github.com/square/okhttp/wiki/Recipes" target="_blank" rel="external">官方API</a><br>为了更方便学习与使用此框架，我就花费了点时间封装成了一个工具类</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div></pre></td><td class="code"><pre><div class="line">//GET 同步 返回Response</div><div class="line">Response response = OkHttpManager.executeSync(&quot;http://www.baidu.com&quot;);</div><div class="line"></div><div class="line">//GET 同步处理 get String</div><div class="line">String string = OkHttpManager.executeSyncString(&quot;http://home.sise.cn&quot;);</div><div class="line"></div><div class="line">//GET 异步 回调</div><div class="line">OkHttpManager.enqueueAsync(&quot;http://home.sise.cn&quot;, new Callback() &#123;</div><div class="line">    @Override</div><div class="line">    public void onFailure(Call call, IOException e) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//异步处理 结果我才不鸟它呢</div><div class="line">OkHttpManager.enqueueAsync(&quot;http://home.sise.cn&quot;);</div><div class="line"></div><div class="line">//post异步处理 结果是我的装备</div><div class="line">FormBody body = new FormBody.Builder()</div><div class="line">        .add(&quot;username&quot;, &quot;alic&quot;)</div><div class="line">        .add(&quot;password&quot;, &quot;alic&quot;)</div><div class="line">        .build();</div><div class="line">OkHttpManager.postEnqueueAsync(&quot;http://172.16.168.35:1010/login.php&quot;, body, new Callback() &#123;</div><div class="line">    @Override</div><div class="line">    public void onFailure(Call call, IOException e) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line">        Log.e(&quot;Test&quot;, response.body().string());</div><div class="line">    &#125;</div><div class="line">&#125;);</div><div class="line"></div><div class="line">//POST 表单 动态数据 动态文件</div><div class="line">//表单数据</div><div class="line">HashMap&lt;String, String&gt; mapData = new HashMap&lt;&gt;();</div><div class="line">mapData.put(&quot;username&quot;, &quot;alic&quot;);</div><div class="line">mapData.put(&quot;password&quot;, &quot;alic&quot;);</div><div class="line">//表单文件</div><div class="line">File file1 = new File(&quot;/storage/sdcard1/1.png&quot;);</div><div class="line">File file2 = new File(&quot;/storage/sdcard1/scs.jpg&quot;);</div><div class="line">HashMap&lt;String, File&gt; mapFile = new HashMap&lt;&gt;();</div><div class="line">mapFile.put(&quot;screen1&quot;,file1);</div><div class="line">mapFile.put(&quot;screen2&quot;,file2);</div><div class="line">//重点在这里</div><div class="line">OkHttpManager.postFormAsync(&quot;http://172.16.168.35:1010/upload.php&quot;, mapData, mapFile, new Callback() &#123;</div><div class="line">    @Override</div><div class="line">    public void onFailure(Call call, IOException e) &#123;</div><div class="line"></div><div class="line">    &#125;</div><div class="line"></div><div class="line">    @Override</div><div class="line">    public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line">        System.out.println(&quot;form-&quot; + response.body().string());</div><div class="line">    &#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure>
+<p>是不是使用起来觉得很方便咧 简单封装如下<br><a href="https://github.com/alicance/Android-Utils" target="_blank" rel="external">具体封装github同步更新封装</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div><div class="line">209</div><div class="line">210</div><div class="line">211</div><div class="line">212</div><div class="line">213</div><div class="line">214</div><div class="line">215</div><div class="line">216</div><div class="line">217</div><div class="line">218</div><div class="line">219</div><div class="line">220</div><div class="line">221</div><div class="line">222</div><div class="line">223</div><div class="line">224</div><div class="line">225</div><div class="line">226</div><div class="line">227</div><div class="line">228</div><div class="line">229</div><div class="line">230</div><div class="line">231</div><div class="line">232</div><div class="line">233</div><div class="line">234</div><div class="line">235</div><div class="line">236</div><div class="line">237</div><div class="line">238</div><div class="line">239</div><div class="line">240</div><div class="line">241</div><div class="line">242</div><div class="line">243</div><div class="line">244</div><div class="line">245</div><div class="line">246</div><div class="line">247</div><div class="line">248</div><div class="line">249</div><div class="line">250</div><div class="line">251</div><div class="line">252</div><div class="line">253</div><div class="line">254</div><div class="line">255</div><div class="line">256</div><div class="line">257</div><div class="line">258</div><div class="line">259</div><div class="line">260</div><div class="line">261</div><div class="line">262</div><div class="line">263</div><div class="line">264</div><div class="line">265</div><div class="line">266</div><div class="line">267</div><div class="line">268</div><div class="line">269</div><div class="line">270</div><div class="line">271</div><div class="line">272</div><div class="line">273</div><div class="line">274</div><div class="line">275</div><div class="line">276</div><div class="line">277</div><div class="line">278</div><div class="line">279</div><div class="line">280</div><div class="line">281</div><div class="line">282</div><div class="line">283</div><div class="line">284</div><div class="line">285</div><div class="line">286</div><div class="line">287</div><div class="line">288</div><div class="line">289</div><div class="line">290</div><div class="line">291</div><div class="line">292</div><div class="line">293</div><div class="line">294</div><div class="line">295</div><div class="line">296</div><div class="line">297</div><div class="line">298</div><div class="line">299</div><div class="line">300</div><div class="line">301</div><div class="line">302</div><div class="line">303</div><div class="line">304</div><div class="line">305</div><div class="line">306</div><div class="line">307</div><div class="line">308</div><div class="line">309</div><div class="line">310</div><div class="line">311</div><div class="line">312</div><div class="line">313</div><div class="line">314</div><div class="line">315</div><div class="line">316</div><div class="line">317</div><div class="line">318</div><div class="line">319</div><div class="line">320</div><div class="line">321</div><div class="line">322</div><div class="line">323</div><div class="line">324</div><div class="line">325</div><div class="line">326</div><div class="line">327</div><div class="line">328</div><div class="line">329</div></pre></td><td class="code"><pre><div class="line">package com.samego.alic.androidutils.utils;</div><div class="line"></div><div class="line"></div><div class="line">import android.os.Environment;</div><div class="line"></div><div class="line">import java.io.File;</div><div class="line">import java.io.IOException;</div><div class="line">import java.util.Map;</div><div class="line">import java.util.concurrent.TimeUnit;</div><div class="line"></div><div class="line">import okhttp3.Cache;</div><div class="line">import okhttp3.Call;</div><div class="line">import okhttp3.Callback;</div><div class="line">import okhttp3.MediaType;</div><div class="line">import okhttp3.MultipartBody;</div><div class="line">import okhttp3.OkHttpClient;</div><div class="line">import okhttp3.Request;</div><div class="line">import okhttp3.RequestBody;</div><div class="line">import okhttp3.Response;</div><div class="line"></div><div class="line">/**</div><div class="line"> * oKHttp的工具类</div><div class="line"> * Created by alic on 16-5-20.</div><div class="line"> */</div><div class="line">public class OkHttpManager &#123;</div><div class="line">    /**</div><div class="line">     * 静态实例</div><div class="line">     */</div><div class="line">    private static OkHttpManager okHttpManager;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * OkHttpClient实例</div><div class="line">     */</div><div class="line">    private OkHttpClient client;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 单例模式</div><div class="line">     * 对于但是模式网上有很对写法 实际得看需求</div><div class="line">     *</div><div class="line">     * @return OkHttpManager</div><div class="line">     */</div><div class="line">    private static OkHttpManager getInstance() &#123;</div><div class="line">        if (okHttpManager == null)</div><div class="line">            okHttpManager = new OkHttpManager();</div><div class="line">        return okHttpManager;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    public static final MediaType MEDIA_TYPE_MARKDOWN = MediaType.parse(&quot;text/x-markdown; charset=utf-8&quot;);</div><div class="line">    //post请求header-image</div><div class="line">    private static final MediaType MEDIA_TYPE_PNG = MediaType.parse(&quot;image/*&quot;);</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 构造方法</div><div class="line">     */</div><div class="line">    public OkHttpManager() &#123;</div><div class="line">        //实例化OkHttpClient</div><div class="line">        client = new OkHttpClient();</div><div class="line">        //配置okHttpClient的参数</div><div class="line">        client.newBuilder().connectTimeout(10, TimeUnit.SECONDS);</div><div class="line">        client.newBuilder().readTimeout(10, TimeUnit.SECONDS);</div><div class="line">        client.newBuilder().writeTimeout(10, TimeUnit.SECONDS);</div><div class="line">        //设置缓存信息的处理：创建缓存对象，构造方法用于控制缓存位置及最大缓存大小【单位是Byte】</div><div class="line">        Cache cache = new Cache(new File(Environment.getExternalStorageDirectory().getPath()), 10 * 1024 * 1024);</div><div class="line">        client.newBuilder().cache(cache);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    //GET同步请求 返回Response</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get请求 不开启异步线程 公开方法</div><div class="line">     *</div><div class="line">     * @param url 请求参数url</div><div class="line">     * @return response 返回响应</div><div class="line">     */</div><div class="line">    public static Response executeSync(String url) &#123;</div><div class="line">        return OkHttpManager.getInstance().doExecuteSync(url);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get请求 不开启异步线程 内部方法</div><div class="line">     *</div><div class="line">     * @param url 请求参数url</div><div class="line">     * @return response 返回响应</div><div class="line">     */</div><div class="line">    private Response doExecuteSync(String url) &#123;</div><div class="line">        Request request = new Request.Builder().url(url).build();</div><div class="line">        try &#123;</div><div class="line">            Response response = client.newCall(request).execute();</div><div class="line">            if (response.isSuccessful())</div><div class="line">                return response;</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    //GET同步请求并获取数据</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get请求 同步线程 公开方法</div><div class="line">     *</div><div class="line">     * @param url url</div><div class="line">     * @return String</div><div class="line">     */</div><div class="line">    public static String executeSyncString(String url) &#123;</div><div class="line">        return OkHttpManager.getInstance().doExecuteSyncString(url);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get请求 同步线程 内部方法</div><div class="line">     *</div><div class="line">     * @param url url</div><div class="line">     * @return String</div><div class="line">     */</div><div class="line">    private String doExecuteSyncString(String url) &#123;</div><div class="line">        try &#123;</div><div class="line">            Response response = doExecuteSync(url);</div><div class="line">            if (response != null)</div><div class="line">                return response.body().string();</div><div class="line">        &#125; catch (IOException e) &#123;</div><div class="line">            e.printStackTrace();</div><div class="line">        &#125;</div><div class="line">        return null;</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    //GET 异步请求 内部方法</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get 异步请求 公开方法</div><div class="line">     * 对结果处理</div><div class="line">     *</div><div class="line">     * @param url url</div><div class="line">     */</div><div class="line">    public static void enqueueAsync(String url, Callback callback) &#123;</div><div class="line">        OkHttpManager.getInstance().doEnqueueAsync(url, callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 自定义对结果处理 内部方法</div><div class="line">     *</div><div class="line">     * @param callback 回调方法</div><div class="line">     */</div><div class="line">    private void doEnqueueAsync(String url, Callback callback) &#123;</div><div class="line">        client.newCall(new Request.Builder().url(url).build()).enqueue(callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * get 异步请求 公开方法</div><div class="line">     * 不对结果处理</div><div class="line">     *</div><div class="line">     * @param url url</div><div class="line">     */</div><div class="line">    public static void enqueueAsync(String url) &#123;</div><div class="line">        OkHttpManager.getInstance().doEnqueueAsync(url);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 开启异步线程访问 内部方法</div><div class="line">     * 不对结果处理</div><div class="line">     */</div><div class="line">    private void doEnqueueAsync(String url) &#123;</div><div class="line">        client.newCall(new Request.Builder().url(url).build()).enqueue(new Callback() &#123;</div><div class="line">            @Override</div><div class="line">            public void onFailure(Call call, IOException e) &#123;</div><div class="line">                //todo 这里虽然存在 但是不可以做羞羞事嗒</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line">                //todo 这里虽然存在 但是不可以做羞羞事嗒</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //POST 异步访问 处理结果</div><div class="line"></div><div class="line">    /**</div><div class="line">     * post 异步访问 公开方法</div><div class="line">     *</div><div class="line">     * @param url      url</div><div class="line">     * @param body     提交参数</div><div class="line">     * @param callback 回调函数</div><div class="line">     */</div><div class="line">    public static void postEnqueueAsync(String url, RequestBody body, Callback callback) &#123;</div><div class="line">        OkHttpManager.getInstance().doPostEnqueueAsync(url, body, callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * post 异步访问 内部方法</div><div class="line">     *</div><div class="line">     * @param url      url</div><div class="line">     * @param body     提交参数</div><div class="line">     * @param callback 回调函数</div><div class="line">     */</div><div class="line">    private void doPostEnqueueAsync(String url, RequestBody body, Callback callback) &#123;</div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(url)</div><div class="line">                .post(body)</div><div class="line">                .build();</div><div class="line">        //计划好了 那就干吧</div><div class="line">        client.newCall(request).enqueue(callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line"></div><div class="line">    //POST 异步访问 不处理结果</div><div class="line"></div><div class="line">    /**</div><div class="line">     * POST 异步访问 不处理结果 公开方法</div><div class="line">     *</div><div class="line">     * @param url  url</div><div class="line">     * @param body body</div><div class="line">     */</div><div class="line">    public static void postEnqueueAsync(String url, RequestBody body) &#123;</div><div class="line">        OkHttpManager.getInstance().doPostEnqueueAsync(url, body);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * POST 异步访问 不处理结果 内部方法</div><div class="line">     *</div><div class="line">     * @param url  url</div><div class="line">     * @param body body</div><div class="line">     */</div><div class="line">    private void doPostEnqueueAsync(String url, RequestBody body) &#123;</div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(url)</div><div class="line">                .post(body)</div><div class="line">                .build();</div><div class="line">        //计划好了 那就干吧</div><div class="line">        client.newCall(request).enqueue(new Callback() &#123;</div><div class="line">            @Override</div><div class="line">            public void onFailure(Call call, IOException e) &#123;</div><div class="line">                //todo 这里虽然存在 但是不可以做羞羞事嗒</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            @Override</div><div class="line">            public void onResponse(Call call, Response response) throws IOException &#123;</div><div class="line">                //todo 这里虽然存在 但是不可以做羞羞事嗒</div><div class="line"></div><div class="line">            &#125;</div><div class="line">        &#125;);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //POST  仅上传一个文件 对结果处理</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 上传一个文件 公开方法</div><div class="line">     * @param url url</div><div class="line">     * @param file file</div><div class="line">     * @param callback callback</div><div class="line">     */</div><div class="line">    public static void uploadFile(String url,File file,Callback callback)&#123;</div><div class="line">        OkHttpManager.getInstance().doUploadFile(url,file,callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 上传一个文件 内部方法</div><div class="line">     * @param url url</div><div class="line">     * @param file file</div><div class="line">     * @param callback callback</div><div class="line">     */</div><div class="line">    private void doUploadFile(String url,File file,Callback callback)&#123;</div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(url)</div><div class="line">                .post(RequestBody.create(MEDIA_TYPE_MARKDOWN, file))</div><div class="line">                .build();</div><div class="line"></div><div class="line">        client.newCall(request).enqueue(callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    //表单提交(带文件) 动态参数 动态文件</div><div class="line">    /**</div><div class="line">     * post 文件上传 公开方法</div><div class="line">     *</div><div class="line">     * @param url    url</div><div class="line">     * @param params params</div><div class="line">     * @param files  file</div><div class="line">     */</div><div class="line">    public static void postFormAsync(String url, Map&lt;String, String&gt; params, Map&lt;String, File&gt; files, Callback callback) &#123;</div><div class="line">        OkHttpManager.getInstance().doPostFormAsync(url, params, files, callback);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    /**</div><div class="line">     * 文件上传 内部方法</div><div class="line">     *</div><div class="line">     * @param url    url</div><div class="line">     * @param params params</div><div class="line">     * @param files  files</div><div class="line">     */</div><div class="line">    private void doPostFormAsync(String url, Map&lt;String, String&gt; params, Map&lt;String, File&gt; files, Callback callback) &#123;</div><div class="line"></div><div class="line">        MultipartBody.Builder builder = new MultipartBody.Builder();</div><div class="line">        builder.setType(MultipartBody.FORM);</div><div class="line"></div><div class="line">        //处理提交的参数</div><div class="line">        if (params != null) &#123;</div><div class="line">            //map 遍历</div><div class="line">            for (String key : params.keySet()) &#123;</div><div class="line">                //过滤 判断key是否为空</div><div class="line">                if (!key.equals(&quot;&quot;)) &#123;</div><div class="line">                    builder.addFormDataPart(key, params.get(key));</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        //处理提交的文件</div><div class="line">        if (files != null) &#123;</div><div class="line">            //次句暂且解决params为null</div><div class="line">            builder.addFormDataPart(&quot;hidden&quot;, &quot;debug&quot;);</div><div class="line">            for (String key : files.keySet()) &#123;</div><div class="line"></div><div class="line">                //过滤 判断key是否为空</div><div class="line">                if (!key.equals(&quot;&quot;)) &#123;</div><div class="line">                    builder.addFormDataPart(key, key, RequestBody.create(MEDIA_TYPE_PNG, files.get(key)));</div><div class="line">                    System.out.println(&quot;form- add&quot;);</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        MultipartBody body = builder.build();</div><div class="line"></div><div class="line">        Request request = new Request.Builder()</div><div class="line">                .url(url)</div><div class="line">                .post(body)</div><div class="line">                .build();</div><div class="line">        client.newCall(request).enqueue(callback);</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>若对上文所说的有误或更好的code非常欢迎留言或简信！THX<br><a href="https://github.com/alicance/Android-Utils" target="_blank" rel="external">Github-Adress  Android-Utils</a><br><strong><strong>持续更新~~~</strong></strong></p>
+<p><strong><strong>价值源于技术，贡献源于分享</strong></strong></p>
+<p>更多轮子详情请看：<br>Android车轮之网络数据读取框架OkHttp<br><a href="http://www.jianshu.com/p/e1340dbf77d6" target="_blank" rel="external">Android车轮之图片加载框架Android-Universal-Image-Loader</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/" data-id="cj1izdmc80000bxowmantl9ij" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/">评论</a>
+    
+
+        </footer>
+    </div>
+    
+        
+<nav id="article-nav">
+    
+        <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
+                
+                    那个程序员的Linux常用软件清单
+                
+            </div>
+        </a>
+    
+    
+</nav>
+
+
+    
+</article>
+
+
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/" data-title="Android车轮之网络数据读取框架OkHttp" data-url="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
+
+    
+    </section>
+
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/04/11/Heart-Love/纪念初次到岭师 | 第三次见面/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/随笔/">随笔</a></p>
+                            <p class="item-title"><a href="/2017/04/11/Heart-Love/纪念初次到岭师 | 第三次见面/" class="title">纪念初次到岭师 | 第三次见面</a></p>
+                            <p class="item-date"><time datetime="2017-04-10T16:00:00.000Z" itemprop="datePublished">2017-04-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/16/Linux/Linux运维基础之编辑器/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/16/Linux/Linux运维基础之编辑器/" class="title">Linux运维基础之编辑器</a></p>
+                            <p class="item-date"><time datetime="2017-03-16T14:13:41.000Z" itemprop="datePublished">2017-03-16</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/11/Linux/Linux运维基础之systemd基础/" class="title">Linux运维基础之systemd基础</a></p>
+                            <p class="item-date"><time datetime="2017-03-11T04:25:31.000Z" itemprop="datePublished">2017-03-11</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Android/Android获取网络状态/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Android/">Android</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Android/Android获取网络状态/" class="title">Android获取网络状态</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T12:19:58.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"><a class="article-category-link" href="/categories/Linux/">Linux</a></p>
+                            <p class="item-title"><a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/" class="title">Ubuntu动态一键切换python版本</a></p>
+                            <p class="item-date"><time datetime="2017-03-05T09:37:37.000Z" itemprop="datePublished">2017-03-05</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">四月 2017</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/03/">三月 2017</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">五月 2016</a><span class="archive-list-count">1</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://www.jianshu.com/u/d3b98b758486">简书</a>
+                    </li>
+                
+                    <li>
+                        <a href="https://github.com/alicance/">github</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2017 Alic Feng<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'samego'};
+    (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0]
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+
+
+
+    
+        <script src="/libs/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-share.min.js"></script>
+        <script src="/libs/lightgallery/js/lg-video.min.js"></script>
+    
+    
+        <script src="/libs/justified-gallery/jquery.justifiedGallery.min.js"></script>
+    
+
+
+
+<!-- Custom Scripts -->
+<script src="/js/main.js"></script>
+
+    </div>
+</body>
+</html>

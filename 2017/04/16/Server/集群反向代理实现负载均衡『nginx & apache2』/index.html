@@ -3,17 +3,20 @@
 <head>
     <meta charset="utf-8">
     
-    <title>Alic Feng</title>
+    <title>集群反向代理实现负载均衡『nginx &amp; apache2』 | Alic Feng</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="价值源于技术，技术源于分享">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Alic Feng">
-<meta property="og:url" content="https://samego.com/page/2/index.html">
+    <meta name="description" content="前言今天在专题收录一篇关于ngixn与apache2实现负载均衡的文章，仔细看了一遍，有些地方存在错误，记得之前搭建过这样的环境，今天呢，好好记录分享一下。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="集群反向代理实现负载均衡『nginx & apache2』">
+<meta property="og:url" content="https://samego.com/2017/04/16/Server/集群反向代理实现负载均衡『nginx & apache2』/index.html">
 <meta property="og:site_name" content="Alic Feng">
-<meta property="og:description" content="价值源于技术，技术源于分享">
+<meta property="og:description" content="前言今天在专题收录一篇关于ngixn与apache2实现负载均衡的文章，仔细看了一遍，有些地方存在错误，记得之前搭建过这样的环境，今天呢，好好记录分享一下。">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/1678789-596bcc875786952a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-04-16T06:06:13.828Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Alic Feng">
-<meta name="twitter:description" content="价值源于技术，技术源于分享">
+<meta name="twitter:title" content="集群反向代理实现负载均衡『nginx & apache2』">
+<meta name="twitter:description" content="前言今天在专题收录一篇关于ngixn与apache2实现负载均衡的文章，仔细看了一遍，有些地方存在错误，记得之前搭建过这样的环境，今天呢，好好记录分享一下。">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/1678789-596bcc875786952a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
     
 
     
@@ -192,16 +195,15 @@
 </aside>
 
             
-            <section id="main">
-    <article id="post-Linux/Ubuntu动态一键切换python版本" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-Server/集群反向代理实现负载均衡『nginx &amp; apache2』" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
             <header class="article-header">
                 
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/">Ubuntu动态一键切换python版本</a>
+        <h1 class="article-title" itemprop="name">
+            集群反向代理实现负载均衡『nginx &amp; apache2』
         </h1>
     
 
@@ -210,8 +212,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/">
-            <time datetime="2017-03-05T09:37:37.000Z" itemprop="datePublished">2017-03-05</time>
+        <a href="/2017/04/16/Server/集群反向代理实现负载均衡『nginx & apache2』/">
+            <time datetime="2017-04-16T06:19:58.000Z" itemprop="datePublished">2017-04-16</time>
         </a>
     </div>
 
@@ -219,13 +221,13 @@
                         
     <div class="article-category">
     	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Linux/">Linux</a>
+        <a class="article-category-link" href="/categories/Server/">Server</a>
     </div>
 
                         
     <div class="article-tag">
         <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/python/">python</a>
+        <a class="tag-link" href="/tags/apache/">apache</a>, <a class="tag-link" href="/tags/nginx/">nginx</a>, <a class="tag-link" href="/tags/server/">server</a>
     </div>
 
                     </div>
@@ -235,10 +237,67 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            <p><p><strong><strong>前言</strong></strong><br>ubuntu14.+python默认是已经安装了python2 python2.7 python3 python3.4的，但是最常用的就是python2.7以及python3.4。某些时候会使用不同的版本，因此需要切换其版本。<br>于是搞了一个动态脚本加载python版本以及动态切换其版本的shell脚本。挺方便的：一键查看与修改！</p></p>
-            <p class="article-more-link">
-                <a href="/2017/03/05/Linux/Ubuntu动态一键切换python版本/#more">查看更多</a>
-            </p>
+            
+            <p><strong>前言</strong><br>今天在专题收录一篇关于ngixn与apache2实现负载均衡的文章，仔细看了一遍，有些地方存在错误，记得之前搭建过这样的环境，今天呢，好好记录分享一下。</p>
+<a id="more"></a>
+<hr>
+<p><strong>nginx &amp; apache</strong><br>简单说说它俩的优点</p>
+<ul>
+<li>nginx的并发量高、占用资源少，适用于前端或静态服务</li>
+<li>apache服务超级稳定，适用于后端或动态服务</li>
+</ul>
+<hr>
+<p><strong>nginx &amp; apache协作流程</strong><br>一般而言，我们可以使用nginx以及apache实现集群服务器负载均衡，具体如何实现的呢？它们的工作流程又是如何的呢？</p>
+<ul>
+<li>第一步：客户端访问服务器的时候将会先访问nginx服务器</li>
+<li>第二步：nginx接受客户端请求后将会将请求转发到apache</li>
+<li>第三步：apache接收nginx的转发请求将会处理请求</li>
+<li>第四步：apache将处理后的请求返回客户端，完成一次访问</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/1678789-596bcc875786952a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="nginx &amp; apache协作流程"></p>
+<hr>
+<p><strong>Nginx的upstream分发机制</strong><br>upstream按照轮询（默认）方式进行负载，每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除。虽然这种方式简便、成本低廉。但缺点是：可靠性低和负载分配不均衡。适用于图片服务器集群和纯静态页面服务器集群。基本有如下几种：</p>
+<ul>
+<li><p>轮询( 默认 )<br>适用于图片服务器集群和纯静态页面服务器集群。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">upstream balance&#123;</div><div class="line">    server localhost:8080;</div><div class="line">    server localhost:8081;</div><div class="line">    server localhost:8082;</div><div class="line">   ... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>指定权重<br>权重weight和访问比率成正比，用于后端服务器性能不均的情况。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">upstream balance&#123;</div><div class="line">    server localhost:8080 weight=5;</div><div class="line">    server localhost:8081 weight=10;</div><div class="line">    server localhost:8082 weight=15;</div><div class="line">   ... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>IP绑定 ip_hash<br>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream balance &#123;</div><div class="line">    ip_hash;</div><div class="line">    server localhost:8080;</div><div class="line">    server localhost:8081;</div><div class="line">    server localhost:8082;</div><div class="line">    ... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+<li><p>fair（第三方）<br>按后端服务器的响应时间来分配请求，响应时间短的优先分配。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">upstream balance &#123;</div><div class="line">    fair;</div><div class="line">    server localhost:8080;</div><div class="line">    server localhost:8081;</div><div class="line">    server localhost:8082;</div><div class="line">    ... ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p><strong>nginx &amp; apache安装</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 对于安装不多说(基于debian/ubuntu)</div><div class="line">sudo apt-get install apache2 nginx -y</div></pre></td></tr></table></figure></p>
+<hr>
+<h4 id="重点将在如下"><a href="#重点将在如下" class="headerlink" title="重点将在如下"></a>重点将在如下</h4><p>对于更多的负载均衡理论可以自行搜索，这里旨在实践配置。</p>
+<p><strong>环境场景</strong><br>为了方便配置，所有的服务都是安装在同一台机器上面。</p>
+<blockquote>
+<p>Apache版本：Apache/2.4.7 (Ubuntu)<br>Nginx版本： nginx/1.4.6 (Ubuntu)</p>
+<hr>
+<ul>
+<li>nginx服务器只需要一台服务器即可，它的http服务器的端口使用默认的80，</li>
+<li>apache启动多个端口，模拟多台服务器的80端口。端口分别为8001、8002、8003、8004。</li>
+<li>我们将客户端的请求通过nginx分别按照指定的分发机制转发到apache的8001、8002、8003、8004端口。</li>
+<li>nginx采取权重的分发机制</li>
+</ul>
+</blockquote>
+<p><strong>配置Apache</strong><br>前提：将默认的80端口关闭，因为80端口将为nginx所用。将默认的<code>000-default.conf.bak</code>重命后缀名即可(非conf)。<br>(1) 开启端口监听允许<br>       在apache端口蒋婷配置文件<code>/etc/apache2/ports.conf</code>添加如下信息，记得关闭80端口监听。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Listen 8001</div><div class="line">Listen 8002</div><div class="line">Listen 8003</div><div class="line">Listen 8004</div></pre></td></tr></table></figure></p>
+<p>(2) 配置虚拟目录映射<br>         个人习惯，将每一个虚拟目录配置写一个配置文件，在这里将新建四个conf文件，对应的配置如下：<br><code>/etc/apache2/ites-enabled/8001.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;VirtualHost *:8001&gt;</div><div class="line">    ServerAdmin localhost:8001</div><div class="line">    DocumentRoot /home/alic/www/proxy/8001</div><div class="line">    ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</div><div class="line">    CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure></p>
+<p><code>/etc/apache2/ites-enabled/8002.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">&lt;VirtualHost *:8002&gt;</div><div class="line">    ServerAdmin localhost:8002</div><div class="line">    DocumentRoot /home/alic/www/proxy/8002</div><div class="line">    ErrorLog $&#123;APACHE_LOG_DIR&#125;/error.log</div><div class="line">    CustomLog $&#123;APACHE_LOG_DIR&#125;/access.log combined</div><div class="line">&lt;/VirtualHost&gt;</div></pre></td></tr></table></figure></p>
+<p>剩下的8003.conf、8004.conf就不多说了！<br>(3) 重启Apache，没有问题浏览器就可以直接打开各个端口的访问了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service nginx restart</div></pre></td></tr></table></figure></p>
+<hr>
+<p><strong>配置Nginx</strong><br>(1) upstream<br>定义一个upstream变量，即定义接收转发的服务器<br><code>/etc/nginx/sites-enabled/default</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">#代理转发地址</div><div class="line">upstream balance&#123;</div><div class="line">	server localhost:8001 weight=5;</div><div class="line">	server localhost:8002 weight=10;</div><div class="line">	server localhost:8003 weight=15;</div><div class="line">	server localhost:8004 weight=20;	</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>(2) server<br>配置监听80端口的server，将请求转发到upstream<br><code>/etc/nginx/sites-enabled/default</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">	listen 80 default_server;</div><div class="line">	listen [::]:80 default_server ipv6only=on;</div><div class="line">	server_name localhost;</div><div class="line"></div><div class="line">	location / &#123;</div><div class="line">		try_files $uri $uri/ =404;</div><div class="line">		#修改proxy_pass这里即可</div><div class="line">		proxy_pass http://balance;</div><div class="line">	&#125;</div></pre></td></tr></table></figure></p>
+<p>(3) 重启nginx<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo service nginx restart</div></pre></td></tr></table></figure></p>
+<p>至此，已经配置完成了，我们可以检验检验！！！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8003</div><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8004</div><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8004</div><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8001</div><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8001</div><div class="line">➜  ~ curl 127.0.0.1</div><div class="line">I am proxy apache2 port 8002</div><div class="line">... ...</div></pre></td></tr></table></figure></p>
+<hr>
+<p>Alic say : <strong><strong><a href="https://github.com/alicance" target="_blank" rel="external">价值源于技术，贡献源于分享</a></strong></strong></p>
+
         
         </div>
         <footer class="article-footer">
@@ -248,7 +307,7 @@
 
 </div>
 
-    <a data-url="https://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/" data-id="cj1kuympu000hi7owjjeghvgl" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="https://samego.com/2017/04/16/Server/集群反向代理实现负载均衡『nginx & apache2』/" data-id="cj1kuympn000ci7owio0jt84d" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -316,287 +375,83 @@
 
             
     
-        <a href="https://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2017/03/05/Linux/Ubuntu动态一键切换python版本/">评论</a>
+        <a href="https://samego.com/2017/04/16/Server/集群反向代理实现负载均衡『nginx & apache2』/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2017/04/16/Server/集群反向代理实现负载均衡『nginx &amp; apache2』/">评论</a>
     
 
         </footer>
     </div>
     
-</article>
-
-
-
-    <article id="post-Linux/那个程序员的Linux常用软件清单" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
         
-        
-            <header class="article-header">
-                
+<nav id="article-nav">
     
-        <h1 itemprop="name">
-            <a class="article-title" href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/">那个程序员的Linux常用软件清单</a>
-        </h1>
-    
-
+        <a href="/2017/04/16/Server/Redis数据库集群搭建 | 实践篇/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">上一篇</strong>
+            <div class="article-nav-title">
                 
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/">
-            <time datetime="2017-03-05T08:41:51.000Z" itemprop="datePublished">2017-03-05</time>
+                    Redis数据库集群搭建 | 实践篇
+                
+            </div>
         </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Linux/">Linux</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/linux/">linux</a>, <a class="tag-link" href="/tags/shell/">shell</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><blockquote>
-<p>记得刚开始接触Linux的时候是大学二年级，使用Linux的时间也有一年多了，至于为何会接触到此系统呢，归于一个带我飞的大学同学<strong>左蓝</strong>。在这一年多的时间里，使用的最多的Linux系统是基于debian发行版系列的Ubuntu，对于它的简介呢，那就<a href="https://zh.wikipedia.org/wiki/Ubuntu">维基百科ubuntu</a>。我旨在记录并分享我在ubuntu的深渊使用过并觉得推荐的应用或工具，要是你有更好的推荐希望留言或简信，THX</p>
-</blockquote></p>
-            <p class="article-more-link">
-                <a href="/2017/03/05/Linux/那个程序员的Linux常用软件清单/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/" data-id="cj1kuympx000ji7ow5w8v7hpv" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="https://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2017/03/05/Linux/那个程序员的Linux常用软件清单/">评论</a>
     
-
-        </footer>
-    </div>
-    
-</article>
-
-
-
-    <article id="post-Android/Android车轮之网络数据读取框架OkHttp" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
-    
-        <h1 itemprop="name">
-            <a class="article-title" href="/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/">Android车轮之网络数据读取框架OkHttp</a>
-        </h1>
-    
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/">
-            <time datetime="2016-05-21T03:34:58.000Z" itemprop="datePublished">2016-05-21</time>
+        <a href="/2017/04/11/Heart-Love/纪念初次到岭师 | 第三次见面/" id="article-nav-older" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">下一篇</strong>
+            <div class="article-nav-title">纪念初次到岭师 | 第三次见面</div>
         </a>
-    </div>
-
-
-                        
-    <div class="article-category">
-    	<i class="fa fa-folder"></i>
-        <a class="article-category-link" href="/categories/Android/">Android</a>
-    </div>
-
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/android/">android</a>, <a class="tag-link" href="/tags/okhttp/">okhttp</a>
-    </div>
-
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            <p><p><strong><strong>OkHttp框架的介绍</strong></strong><br>现在Android网络数据处理方面的第三方库文件还是不少的，比如：Volley，Retrofit，HttpClient，OKHttp等等，HttpClient库已经在Android6.+被废弃啦，而目前OkHttp库的技术已经比较成熟，可以这么说：为了让您的应用运行更快、更高效、更节省流量，那么OkHttp库就是为此而生。</p></p>
-            <p class="article-more-link">
-                <a href="/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/#more">查看更多</a>
-            </p>
-        
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/" data-id="cj1kuymp00003i7owaj6saiti" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/#comments" class="article-comment-link ds-thread-count" data-thread-key="https://samego.com/2016/05/21/Android/Android车轮之网络数据读取框架OkHttp/">评论</a>
-    
+</nav>
 
-        </footer>
-    </div>
+
     
 </article>
 
 
+    
+    <section id="comments">
+    
+        
+    <div class="ds-thread" data-thread-key="2017/04/16/Server/集群反向代理实现负载均衡『nginx &amp; apache2』/" data-title="集群反向代理实现负载均衡『nginx &amp; apache2』" data-url="https://samego.com/2017/04/16/Server/集群反向代理实现负载均衡『nginx &amp; apache2』/"></div>
+    <style>
+        #ds-thread #ds-reset .ds-textarea-wrapper {
+            background: none;
+        }
+        #ds-reset .ds-avatar img {
+            box-shadow: none;
+        }
+        #ds-reset .ds-gradient-bg {
+            background: #f7f7f7;
+        }
+        #ds-thread #ds-reset li.ds-tab a {
+            border-radius: 3px;
+        }
+        #ds-thread #ds-reset .ds-post-button {
+            color: white;
+            border: none;
+            box-shadow: none;
+            background: #d32;
+            text-shadow: none;
+            font-weight: normal;
+            font-family: 'Microsoft Yahei';
+        }
+        #ds-thread #ds-reset .ds-post-button:hover {
+            color: white;
+            background: #DE594C;
+        }
+        #ds-thread #ds-reset .ds-post-button:active {
+            background: #d32;
+        }
+        #ds-smilies-tooltip ul.ds-smilies-tabs li a.ds-current {
+            color: white;
+            background: #d32;
+            box-shadow: none;
+            text-shadow: none;
+            font-weight: normal;
+        }
+    </style>
 
-    <nav id="page-nav">
-        <a class="extend prev" rel="prev" href="/">&laquo; 上一页</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
+    
+    </section>
+
 </section>
             
                 <aside id="sidebar">
